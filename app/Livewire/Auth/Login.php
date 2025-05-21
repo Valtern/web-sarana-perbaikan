@@ -43,7 +43,31 @@ class Login extends Component
         RateLimiter::clear($this->throttleKey());
         Session::regenerate();
 
-        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+        // Redirect based on user role
+        $role = Auth::user()->role;
+
+        switch ($role) {
+            case 'admin':
+                $this->redirectIntended(default: route('admin.dashboard', absolute: false), navigate: true);
+                break;
+            case 'lecturer':
+                $this->redirectIntended(default: route('lecturer.dashboard', absolute: false), navigate: true);
+                break;
+            case 'student':
+                $this->redirectIntended(default: route('student.dashboard', absolute: false), navigate: true);
+                break;
+            case 'staff':
+                $this->redirectIntended(default: route('staff.dashboard', absolute: false), navigate: true);
+                break;
+            case 'technician':
+                $this->redirectIntended(default: route('technician.dashboard', absolute: false), navigate: true);
+                break;
+            default:
+                Auth::logout();
+                throw ValidationException::withMessages([
+                    'email' => 'Role not authorized.',
+                ]);
+        }
     }
 
     /**

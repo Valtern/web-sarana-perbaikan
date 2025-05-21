@@ -10,8 +10,6 @@
         $dashboardRoute = match($role) {
             'admin' => 'admin.dashboard',
             'lecturer' => 'lecturer.dashboard',
-
-            
             'student' => 'student.dashboard',
             'staff' => 'staff.dashboard',
             'technician' => 'technician.dashboard',
@@ -27,17 +25,245 @@
         </a>
 
         <flux:navlist variant="outline">
-            <flux:navlist.group :heading="__('Platform')" class="grid">
+    {{-- Common Items --}}
+    <flux:navlist.group :heading="__('Platform')" class="grid">
+        <flux:navlist.item
+            icon="home"
+            :href="route($dashboardRoute)"
+            :current="request()->routeIs($dashboardRoute)"
+            wire:navigate
+        >
+            {{ __('Dashboard') }}
+        </flux:navlist.item>
+    </flux:navlist.group>
+
+    {{-- Role-specific Navigation --}}
+    
+    @switch($role)
+    @case('lecturer')
+            <flux:navlist.group :heading="__('Lecturer Menu')" class="grid">
                 <flux:navlist.item
-                    icon="home"
-                    :href="route($dashboardRoute)"
-                    :current="request()->routeIs($dashboardRoute)"
+                    icon="users"
+                    :href="route('lecturer.report')"
+                    :current="request()->routeIs('lecturer.report')"
                     wire:navigate
                 >
-                    {{ __('Dashboard') }}
+                    {{ __('Report Complaint') }}
+                </flux:navlist.item>
+
+                <flux:navlist.item
+                icon="building-office"
+                :href="route('lecturer.building.list')"
+                :current="request()->routeIs('lecturer.building.list')"
+                wire:navigate
+            >
+                {{ __('Building') }}
+                </flux:navlist.item>
+
+                <flux:navlist.item
+                    icon="cube"
+                    :href="route('lecturer.facility.list')"
+                    :current="request()->routeIs('lecturer.facility.list')"
+                    wire:navigate
+                >
+                    {{ __('Facility') }}
+                </flux:navlist.item>
+
+                <flux:navlist.item
+                    icon="chat-bubble-left"
+                    :href="route('lecturer.feedback.list')"
+                    :current="request()->routeIs('lecturer.feedback.list')"
+                    wire:navigate
+                >
+                    {{ __('Feedback') }}
                 </flux:navlist.item>
             </flux:navlist.group>
-        </flux:navlist>
+            @break
+
+        @case('admin')
+    <flux:navlist.group :heading="__('Admin Menu')" class="grid">
+        <flux:navlist.item
+            icon="document"
+            :href="route('report.management')"
+            :current="request()->routeIs('report.management')"
+            wire:navigate
+        >
+            {{ __('Reports') }}
+        </flux:navlist.item>
+        
+        <flux:navlist.item
+            icon="users"
+            :href="route('user.management')"
+            :current="request()->routeIs('user.management')"
+            wire:navigate
+        >
+            {{ __('Users') }}
+        </flux:navlist.item>
+
+        <flux:navlist.item
+            icon="chat-bubble-left"
+            :href="route('feedback.management')"
+            :current="request()->routeIs('feedback.management')"
+            wire:navigate
+        >
+            {{ __('Feedbacks') }}
+        </flux:navlist.item>
+
+        <flux:navlist.item
+            icon="building-office"
+            :href="route('building.management')"
+            :current="request()->routeIs('building.management')"
+            wire:navigate
+        >
+            {{ __('Buildings') }}
+        </flux:navlist.item>
+
+        <flux:navlist.item
+            icon="cube"
+            :href="route('facility.management')"
+            :current="request()->routeIs('facility.management')"
+            wire:navigate
+        >
+            {{ __('Facilities') }}
+        </flux:navlist.item>
+    </flux:navlist.group>
+
+        {{-- New Group for Assignments --}}
+        <flux:navlist.group :heading="__('Tools')" class="grid">
+            <flux:navlist.item
+                icon="flag"
+                :href="route('assign.priority')"
+                :current="request()->routeIs('assign.priority')"
+                wire:navigate
+            >
+                {{ __('Assign Priority') }}
+            </flux:navlist.item>
+
+            <flux:navlist.item
+                icon="wrench"
+                :href="route('assign.technician')"
+                :current="request()->routeIs('assign.technician')"
+                wire:navigate
+            >
+                {{ __('Assign Technician') }}
+            </flux:navlist.item>
+        </flux:navlist.group>
+    @break
+
+
+        @case('student')
+            <flux:navlist.group :heading="__('Student Menu')" class="grid">
+                <flux:navlist.item
+                    icon="document"
+                    :href="route('student.report')"
+                    :current="request()->routeIs('student.report')"
+                    wire:navigate
+                >
+                    {{ __('Report') }}
+                </flux:navlist.item>
+                <flux:navlist.item
+                icon="building-office"
+                :href="route('student.building.list')"
+                :current="request()->routeIs('student.building.list')"
+                wire:navigate
+            >
+                {{ __('Building') }}
+                </flux:navlist.item>
+
+                <flux:navlist.item
+                    icon="cube"
+                    :href="route('student.facility.list')"
+                    :current="request()->routeIs('student.facility.list')"
+                    wire:navigate
+                >
+                    {{ __('Facility') }}
+                </flux:navlist.item>
+
+                <flux:navlist.item
+                    icon="chat-bubble-left"
+                    :href="route('student.feedback.list')"
+                    :current="request()->routeIs('student.feedback.list')"
+                    wire:navigate
+                >
+                    {{ __('Feedback') }}
+                </flux:navlist.item>
+                </flux:navlist.group>
+            @break
+
+        @case('staff')
+            <flux:navlist.group :heading="__('Staff Menu')" class="grid">
+                <flux:navlist.item
+                    icon="document"
+                    :href="route('staff.report')"
+                    :current="request()->routeIs('staff.report')"
+                    wire:navigate
+                >
+                    {{ __('Report') }}
+                </flux:navlist.item>
+                <flux:navlist.item
+                icon="building-office"
+                :href="route('building.list')"
+                :current="request()->routeIs('building.list')"
+                wire:navigate
+            >
+                {{ __('Building') }}
+                </flux:navlist.item>
+
+                <flux:navlist.item
+                    icon="cube"
+                    :href="route('facility.list')"
+                    :current="request()->routeIs('facility.list')"
+                    wire:navigate
+                >
+                    {{ __('Facility') }}
+                </flux:navlist.item>
+
+                <flux:navlist.item
+                    icon="chat-bubble-left"
+                    :href="route('feedback.list')"
+                    :current="request()->routeIs('feedback.list')"
+                    wire:navigate
+                >
+                    {{ __('Feedback') }}
+                </flux:navlist.item>
+            </flux:navlist.group>
+            @break
+
+            @case('technician')
+            <flux:navlist.group :heading="__('Technician Tools')" class="grid">
+                <flux:navlist.item
+                    icon="users"
+                    :href="route('manage.report.status')"
+                    :current="request()->routeIs('manage.report.status')"
+                    wire:navigate
+                >
+                    {{ __('Manage Report Status') }}
+                </flux:navlist.item>
+
+                <flux:navlist.item
+                icon="building-office"
+                :href="route('technician.building.list')"
+                :current="request()->routeIs('technician.building.list')"
+                wire:navigate
+            >
+                {{ __('Building') }}
+                </flux:navlist.item>
+
+                <flux:navlist.item
+                    icon="cube"
+                    :href="route('technician.facility.list')"
+                    :current="request()->routeIs('technician.facility.list')"
+                    wire:navigate
+                >
+                    {{ __('Facility') }}
+                </flux:navlist.item>
+            </flux:navlist.group>
+            @break
+
+        @default
+            {{-- Optional: default navigation for unknown roles --}}
+    @endswitch
+</flux:navlist>
 
         <flux:spacer />
 
@@ -150,9 +376,54 @@
             </flux:menu>
         </flux:dropdown>
     </flux:header>
-
+    
     {{ $slot }}
+    <!-- ========== FOOTER ========== -->
+<flux:footer class="w-full px-4 sm:px-6 lg:px-8 bg-white dark:bg-neutral-900">
+  <div class="py-6 border-t border-gray-200 dark:border-neutral-700">
+    <div class="flex flex-wrap justify-between items-center gap-2">
+      <div>
+        <p class="text-xs text-gray-600 dark:text-neutral-400">
+          © 2025 Campus Facility Reporting System.
+        </p>
+      </div>
 
+      <ul class="flex flex-wrap items-center">
+        <li class="inline-block relative pe-4 text-xs last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-1.5 before:-translate-y-1/2 before:size-[3px] before:rounded-full before:bg-gray-400 dark:text-neutral-500 dark:before:bg-neutral-600">
+          <a class="text-xs text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-hidden focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400" href="#">
+            X (Twitter)
+          </a>
+        </li>
+        <li class="inline-block relative pe-4 text-xs last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-1.5 before:-translate-y-1/2 before:size-[3px] before:rounded-full before:bg-gray-400 dark:text-neutral-500 dark:before:bg-neutral-600">
+          <a class="text-xs text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-hidden focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400" href="#">
+            Dribbble
+          </a>
+        </li>
+        <li class="inline-block pe-4 text-xs">
+          <a class="text-xs text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-hidden focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400" href="#">
+            Github
+          </a>
+        </li>
+        <li class="inline-block">
+          <!-- Dark Mode -->
+          <button type="button" class="hs-dark-mode hs-dark-mode-active:hidden relative flex justify-center items-center size-7 border border-gray-200 text-gray-500 rounded-full hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" data-hs-theme-click-value="dark">
+            <span class="sr-only">Dark</span>
+            <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          </button>
+          <button type="button" class="hs-dark-mode hs-dark-mode-active:flex hidden relative flex justify-center items-center size-7 border border-gray-200 text-gray-500 rounded-full hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" data-hs-theme-click-value="light">
+            <span class="sr-only">Light</span>
+            <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          </button>
+          <!-- End Dark Mode -->
+        </li>
+      </ul>
+    </div>
+  </div>
+</flux:footer>
+
+<!-- ========== END FOOTER ========== -->
     @fluxScripts
+
+
 </body>
 </html>

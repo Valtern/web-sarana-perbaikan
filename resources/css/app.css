@@ -1,10 +1,15 @@
 @import 'tailwindcss';
 @import '../../vendor/livewire/flux/dist/flux.css';
 
-@source '../views';
+@source "../views";
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
 @source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+@source '../../vendor/masmerise/livewire-toaster/resources/views/*.blade.php';
+
+/* Preline UI */
+@import "../../node_modules/preline/variants.css";
+@source "../../node_modules/preline/dist/*.js";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -47,12 +52,12 @@
     }
 }
 
-[data-flux-field]:not(ui-radio, ui-checkbox) {
+[data-flux-field] {
     @apply grid gap-2;
 }
 
 [data-flux-label] {
-    @apply  !mb-0 !leading-tight;
+    @apply !mb-0 !leading-tight;
 }
 
 input:focus[data-flux-control],
