@@ -52,6 +52,8 @@ public function index()
 
     if ($role === 'staff') {
         return view('livewire.staff.staff-report', compact('reports'));
+    } elseif ($role === 'lecturer') {
+        return view('livewire.lecturer.lecturer-report', compact('reports'));
     } else {
         return view('livewire.student.student-report', compact('reports'));
     }

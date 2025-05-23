@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             StaffSeeder::class,
             StudentSeeder::class,
-            TechnicianSeeder::class
+            TechnicianSeeder::class,
+            LecturerSeeder::class
 
         ]);
     }
