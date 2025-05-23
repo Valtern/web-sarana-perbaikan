@@ -28,6 +28,8 @@ use App\Livewire\Lecturer\LecturerFacilityList;
 use App\Livewire\Technician\ManageReportStatus;
 use App\Livewire\Technician\TechnicianDashboard;
 
+use App\Http\Controllers\ReportController;
+
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
@@ -61,6 +63,10 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::get('/student/list', BuildingList::class)->name('student.building.list');
     Route::get('/student/facility', FacilityList::class)->name('student.facility.list');
     Route::get('/student/feedback', FeedbackList::class)->name('student.feedback.list');
+    Route::post('/report', [ReportController::class, 'store'])->name('report.store');
+    Route::get('/student/reports', [\App\Http\Controllers\ReportController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('student.reports');
 });
 
 // Technician
@@ -69,6 +75,7 @@ Route::middleware(['auth', 'role:technician'])->group(function () {
     Route::get('/technician/manage', ManageReportStatus::class)->name('manage.report.status');
     Route::get('/technician/list', \App\Livewire\Technician\BuildingList::class)->name('technician.building.list');
     Route::get('/technician/facility', \App\Livewire\Technician\FacilityList::class)->name('technician.facility.list');
+    Route::post('/report', [ReportController::class, 'store'])->middleware('auth')->name('report.store');
 });
 
 // Staff
@@ -88,6 +95,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/password', Password::class)->name('settings.password');
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
+
+
 
 require __DIR__.'/auth.php';
 
