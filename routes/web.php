@@ -85,6 +85,9 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
     Route::get('/staff/list', \App\Livewire\Staff\BuildingList::class)->name('building.list');
     Route::get('/staff/facility', \App\Livewire\Staff\FacilityList::class)->name('facility.list');
     Route::get('/staff/feedback', \App\Livewire\Staff\FeedbackList::class)->name('feedback.list');
+        Route::get('/staff/reports', [\App\Http\Controllers\ReportController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('staff.reports');
 });
 
 // Settings - semua role authenticated bisa akses

@@ -43,12 +43,19 @@ public function store(Request $request)
 
 public function index()
 {
-    $reports = \App\Models\Report::with('user')
-        ->where('user_id', auth()->id())
+    $reports = Report::with('user')
+        ->where('user_ID', auth()->id())
         ->latest()
         ->get();
 
-    return view('livewire.student.student-report', compact('reports'));
+    $role = Auth::user()->role; // assuming 'role' is a field in the users table
+
+    if ($role === 'staff') {
+        return view('livewire.staff.staff-report', compact('reports'));
+    } else {
+        return view('livewire.student.student-report', compact('reports'));
+    }
 }
+
 
 }
