@@ -64,13 +64,9 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified', 'role:lecturer'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('lecturer.dashboard');
     Route::get('/lecturer/report', LecturerReport::class)->name('lecturer.report');
-    Route::get('/lecturer/building', LecturerBuildingList::class)->name('lecturer.building.list');
-    Route::get('/lecturer/facility', LecturerFacilityList::class)->name('lecturer.facility.list');
-    Route::get('/lecturer/feedback', LecturerFeedbackList::class)->name('lecturer.feedback.list');
- Route::post('/report', [ReportController::class, 'store'])->name('report.store');
-    Route::get('/staff/reports', [\App\Http\Controllers\ReportController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('staff.reports');
+    Route::get('/lecturer/building', BuildingList::class)->name('lecturer.building.list');
+    Route::get('/lecturer/facility', FacilityList::class)->name('lecturer.facility.list');
+    Route::get('/lecturer/feedback', FeedbackList::class)->name('lecturer.feedback.list');
 
 });
 
