@@ -8,6 +8,6 @@ class BuildingList extends Component
 {
     public function render()
     {
-        return view('livewire.technician.technician-building-list');
+        return view('livewire.technician.menu.technician-building-list');
     }
 }

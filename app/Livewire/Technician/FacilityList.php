@@ -8,6 +8,6 @@ class FacilityList extends Component
 {
     public function render()
     {
-        return view('livewire.technician.technician-facility-list');
+        return view('livewire.technician.menu.technician-facility-list');
     }
 }

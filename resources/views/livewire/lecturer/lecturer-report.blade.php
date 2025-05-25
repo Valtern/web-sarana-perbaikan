@@ -1,21 +1,26 @@
-<div><!-- Contact Us -->
+<div><!-- Table Section -->
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-  <div class="max-w-2xl lg:max-w-5xl mx-auto">
-    <div class="text-center">
-      <h1 class="text-3xl font-bold text-gray-800 sm:text-4xl dark:text-white">
-        Report Damaged Facilities
-      </h1>
-      <p class="mt-1 text-gray-600 dark:text-neutral-400">
-        We'd love to talk about how we can help you.
-      </p>
-    </div>
+  <!-- Card -->
+  <div class="flex flex-col">
+    <div class="-m-1.5 overflow-x-auto">
+      <div class="p-1.5 min-w-full inline-block align-middle">
+        <div class="bg-white border border-gray-200 rounded-xl shadow-2xs overflow-hidden dark:bg-neutral-900 dark:border-neutral-700">
+          <!-- Header -->
+          <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
+            <div>
+              <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
+                API Keys
+              </h2>
+              <p class="text-sm text-gray-600 dark:text-neutral-400">
+                Keys you have generated to connect with third-party clients or access the <a class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500" href="#">Preline API.</a>
+              </p>
+            </div>
 
-    <div class="mt-12 grid items-center lg:grid-cols-2 gap-6 lg:gap-16">
-      <!-- Card -->
-      <div class="flex flex-col border border-gray-200 rounded-xl p-4 sm:p-6 lg:p-8 dark:border-neutral-700">
-        <h2 class="mb-8 text-xl font-semibold text-gray-800 dark:text-neutral-200">
-          Fill in the form
-        </h2>
+            <div>
+              <div class="inline-flex gap-x-2">
+                <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" href="#">
+                  View all
+                </a>
 
 @livewire('lecturer.submit-report')
 
