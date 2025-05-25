@@ -41,7 +41,7 @@ class BuildingList extends Component
     public function render()
     {
         $buildings = Building::orderBy('building_ID', 'asc')->get();
-        return view('livewire.lecturer.lecturer-building-list', compact('buildings'));
+        return view('livewire.lecturer.menu.lecturer-building-list', compact('buildings'));
     }
 }
 

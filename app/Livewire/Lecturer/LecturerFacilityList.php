@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Technician;
+namespace App\Livewire\Lecturer;
 
 use Livewire\Component;
 use App\Models\Facility;
@@ -41,7 +41,7 @@ class FacilityList extends Component
         $facilities = Facility::orderBy('facility_ID', 'asc')->get();
         $buildings = Building::orderBy('building_ID', 'asc')->get();
         
-        return view('livewire.lecturer.lecturer-facility-list', [
+        return view('livewire.lecturer.menu.lecturer-facility-list', [
             'facilities' => $facilities,
             'buildings' => $buildings
         ]);
