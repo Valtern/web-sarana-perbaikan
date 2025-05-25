@@ -8,6 +8,6 @@ class AssignTechnician extends Component
 {
     public function render()
     {
-        return view('livewire.admin.assign-technician');
+        return view('livewire.admin.assigns.assign-technician');
     }
 }

@@ -8,6 +8,6 @@ class FeedbackManagement extends Component
 {
     public function render()
     {
-        return view('livewire.admin.feedback-management');
+        return view('livewire.admin.menu.feedback.feedback-management');
     }
 }

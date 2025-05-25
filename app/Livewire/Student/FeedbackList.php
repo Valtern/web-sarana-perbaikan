@@ -8,6 +8,6 @@ class FeedbackList extends Component
 {
     public function render()
     {
-        return view('livewire.student.student-feedback-list');
+        return view('livewire.student.menu.student-feedback-list');
     }
 }
