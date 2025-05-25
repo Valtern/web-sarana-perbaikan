@@ -8,6 +8,6 @@ class AssignPriority extends Component
 {
     public function render()
     {
-        return view('livewire.admin.assign-priority');
+        return view('livewire.admin.assigns.assign-priority');
     }
 }

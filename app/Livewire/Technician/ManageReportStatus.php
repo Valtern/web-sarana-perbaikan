@@ -8,6 +8,6 @@ class ManageReportStatus extends Component
 {
     public function render()
     {
-        return view('livewire.technician.manage-report-status');
+        return view('livewire.technician.menu.manage-report-status');
     }
 }
