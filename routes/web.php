@@ -32,7 +32,6 @@ use App\Livewire\Lecturer\{
 
 // Student
 use App\Livewire\Student\{
-    AddReport, // <-- added from theirs
     BuildingList as StudentBuildingList,
     FacilityList as StudentFacilityList,
     FeedbackList as StudentFeedbackList,
