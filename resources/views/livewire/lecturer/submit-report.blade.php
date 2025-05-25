@@ -1,10 +1,4 @@
 <div>
-  @if (session('success'))
-    <div class="mb-4 p-3 bg-green-100 text-green-700 rounded">
-        {{ session('success') }}
-    </div>
-  @endif
-
   @error('facility_name') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
   @error('category') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
   @error('picture_proof') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror

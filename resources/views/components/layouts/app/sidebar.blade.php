@@ -38,7 +38,7 @@
     </flux:navlist.group>
 
     {{-- Role-specific Navigation --}}
-    
+
     @switch($role)
     @case('lecturer')
             <flux:navlist.group :heading="__('Lecturer Menu')" class="grid">
@@ -48,7 +48,7 @@
                     :current="request()->routeIs('lecturer.report')"
                     wire:navigate
                 >
-                    {{ __('Report Complaint') }}
+                    {{ __('Report') }}
                 </flux:navlist.item>
 
                 <flux:navlist.item
@@ -90,7 +90,7 @@
         >
             {{ __('Reports') }}
         </flux:navlist.item>
-        
+
         <flux:navlist.item
             icon="users"
             :href="route('user.management')"
@@ -376,7 +376,7 @@
             </flux:menu>
         </flux:dropdown>
     </flux:header>
-    
+
     {{ $slot }}
     <!-- ========== FOOTER ========== -->
 <flux:footer class="w-full px-4 sm:px-6 lg:px-8 bg-white dark:bg-neutral-900">
@@ -425,5 +425,7 @@
     @fluxScripts
 
     <x-toaster-hub /> <!-- 👈 -->
+
+
 </body>
 </html>

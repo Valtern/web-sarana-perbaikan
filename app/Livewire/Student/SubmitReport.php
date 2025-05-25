@@ -5,8 +5,11 @@ namespace App\Livewire\Student;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Report;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Masmerise\Toaster\Toaster;
+
+
 
 class SubmitReport extends Component
 {
@@ -21,11 +24,11 @@ class SubmitReport extends Component
         'category' => 'required|in:Electronic,Table,Chair,Desk,Computer,Miscellaneous',
         'picture_proof' => 'nullable|image|max:2048',
     ];
+
 public function submit()
 {
     $validated = $this->validate();
 
-    // Handle the image upload
     $imagePath = null;
 
     if ($this->picture_proof) {
@@ -43,11 +46,13 @@ public function submit()
     ]);
 
     $this->reset(['facility_name', 'location', 'description', 'category', 'picture_proof']);
+
+    // Fire toaster event
+    Toaster::success('User updated successfully!');
+
+
     $this->dispatch('report-submitted');
-
-    session()->flash('success', 'Report submitted successfully.');
 }
-
 
     public function render()
     {
