@@ -1,20 +1,20 @@
 <div wire:poll.5s>
-<div class="mb-6 border border-gray-300 dark:border-neutral-700 rounded-lg shadow-sm bg-white dark:bg-neutral-900 p-4">
+<div class="mb-6 border border-gray-300 dark:border-neutral-700 rounded-lg bg-white dark:bg-neutral-900 p-4">
   <h2 class="text-lg font-semibold text-gray-800 dark:text-neutral-200 mb-4">Search & Filter Reports</h2>
   <div class="flex flex-col sm:flex-row gap-4 sm:items-end">
     <div class="flex-1">
       <label class="block text-sm font-medium text-gray-700 dark:text-neutral-300">Search by Name</label>
-      <input type="text" wire:model.debounce.500ms="searchTerm" class="mt-1 block w-full rounded-md shadow-sm border-gray-300 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white" placeholder="Enter name...">
+      <input type="text" wire:model.debounce.500ms="searchTerm" class="mt-1 block w-150 rounded-md  border-gray-300 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white" placeholder="Enter name...">
     </div>
 
     <div>
       <label class="block text-sm font-medium text-gray-700 dark:text-neutral-300">Start Date</label>
-      <input type="date" wire:model="startDate" class="mt-1 block w-full rounded-md shadow-sm border-gray-300 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
+      <input type="date" wire:model="startDate" class="mt-1 block w-full rounded-md  border-gray-300 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
     </div>
 
     <div>
       <label class="block text-sm font-medium text-gray-700 dark:text-neutral-300">End Date</label>
-      <input type="date" wire:model="endDate" class="mt-1 block w-full rounded-md shadow-sm border-gray-300 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
+      <input type="date" wire:model="endDate" class="mt-1 block w-full rounded-md  border-gray-300 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
     </div>
   </div>
 </div>

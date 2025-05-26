@@ -41,7 +41,7 @@ class LecturerFacilityList extends Component
         $facilities = Facility::orderBy('facility_ID', 'asc')->get();
         $buildings = Building::orderBy('building_ID', 'asc')->get();
 
-    return view('livewire.lecturer.lecturer-facility-list', [
+    return view('livewire.lecturer.menu.lecturer-facility-list', [
     'facilities' => $facilities,
     'buildings' => $buildings
     ]);

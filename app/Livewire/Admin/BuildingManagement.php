@@ -44,7 +44,7 @@ class BuildingManagement extends Component
 
         if ($building) {
             $building->delete();
-            Toaster::success('Building deleted!'); 
+            Toaster::success(message: 'Building deleted!'); 
         }
     }
 

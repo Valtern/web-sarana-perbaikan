@@ -237,7 +237,7 @@
                     :current="request()->routeIs('manage.report.status')"
                     wire:navigate
                 >
-                    {{ __('Manage Report Status') }}
+                    {{ __('Manage Assignment') }}
                 </flux:navlist.item>
 
                 <flux:navlist.item

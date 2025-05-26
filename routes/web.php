@@ -56,7 +56,7 @@ use App\Livewire\Staff\{
 
 // Technician
 use App\Livewire\Technician\{
-    ManageReportStatus,
+    ManageAssignmentStatus,
     TechnicianDashboard,
     BuildingList as TechnicianBuildingList,
     FacilityList as TechnicianFacilityList
@@ -94,6 +94,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/edit-building/{id}', EditBuilding::class)->name('admin.menu.building.edit-building');
     Route::get('/admin/edit-facility/{id}', EditFacility::class)->name('admin.menu.facility.edit-facility');
     Route::get('/admin/edit-user/{id}', EditUser::class)->name('admin.menu.user.edit-user');
+
 });
 
 // Student Routes
@@ -115,7 +116,7 @@ Route::middleware(['auth', 'role:student'])->group(function () {
 // Technician Routes
 Route::middleware(['auth', 'role:technician'])->group(function () {
     Route::get('/technician/dashboard', TechnicianDashboard::class)->name('technician.dashboard');
-    Route::get('/technician/manage', ManageReportStatus::class)->name('manage.report.status');
+    Route::get('/technician/manage', ManageAssignmentStatus::class)->name('manage.report.status');
     Route::get('/technician/list', TechnicianBuildingList::class)->name('technician.building.list');
     Route::get('/technician/facility', TechnicianFacilityList::class)->name('technician.facility.list');
 

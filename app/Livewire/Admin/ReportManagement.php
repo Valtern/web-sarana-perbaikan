@@ -10,6 +10,7 @@ class ReportManagement extends Component
     public $searchTerm = '';
     public $startDate;
     public $endDate;
+    public $reports;
 
     public function render()
     {

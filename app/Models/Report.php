@@ -9,9 +9,7 @@ class Report extends Model
 {
     use HasFactory;
 
-    // Optional if your table name is non-standard
     protected $table = 'report';
-
     protected $primaryKey = 'report_ID';
 
     protected $fillable = [
@@ -25,26 +23,30 @@ class Report extends Model
         'status',
     ];
 
-    // Default attributes
     protected $attributes = [
         'status' => 'Pending',
     ];
 
-    // Relationships
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
+    // Relasi ke pelapor (user)
     public function user()
     {
         return $this->belongsTo(User::class, 'user_ID');
     }
 
-    protected $casts = [
-    'created_at' => 'datetime',
-    'updated_at' => 'datetime',
-];
+    // 🔁 Tambahan: Relasi ke tabel repairs (jika satu laporan bisa punya satu atau lebih perbaikan)
+    public function repairs()
+    {
+        return $this->hasMany(Repair::class, 'facility_report_id', 'report_ID');
+    }
 
-
-    // You can add a relationship for priority if needed
-    // public function priority()
+    // Kalau kamu hanya ingin satu repair per report:
+    // public function repair()
     // {
-    //     return $this->belongsTo(Priority::class, 'priority_Assignment');
+    //     return $this->hasOne(Repair::class, 'facility_report_id', 'report_ID');
     // }
 }
