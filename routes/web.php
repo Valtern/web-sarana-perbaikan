@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Admin\ProfileAdmin;
 use App\Livewire\Lecturer\LecturerBuildingList;
 use App\Livewire\Lecturer\LecturerFeedbackList;
 use App\Livewire\Lecturer\LecturerReport;
@@ -51,6 +52,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/facility', FacilityManagement::class)->name('facility.management');
     Route::get('/admin/priority', AssignPriority::class)->name('assign.priority');
     Route::get('/admin/technician', AssignTechnician::class)->name('assign.technician');
+    Route::get('/admin/profileAdmin', ProfileAdmin::class)->name('profile.admin');
 
 });
 

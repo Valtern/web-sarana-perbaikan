@@ -1,4 +1,6 @@
-<div><!-- Card Section -->
+
+
+\<div><!-- Card Section -->
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
       <!-- Grid -->
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -13,7 +15,7 @@
             <h3 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-800 dark:text-neutral-200">
               150
             </h3>
-          </div>
+          </di v>
     
           <dl class="flex justify-center items-center divide-x divide-gray-200 dark:divide-neutral-800">
             <dt class="pe-3">

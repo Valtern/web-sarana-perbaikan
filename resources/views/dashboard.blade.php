@@ -51,7 +51,7 @@
               Creative minds
             </h3>
             <p class="mt-1 text-gray-600 dark:text-neutral-400">
-              We choose our teams carefully. Our people are the secret to great work.
+              We  our teams carefully. Our people are the secret to great work.
             </p>
           </div>
         </div>
