@@ -21,23 +21,24 @@ return new class extends Migration
             $table->float('weight')->notNull();
             $table->enum('type', ['max', 'min']);
         });
+// Create sample_topsis table with matching foreign key types
+Schema::create('sample_topsis', function (Blueprint $table) {
+    $table->id('id_sample');
+    $table->unsignedBigInteger('id_alternative');
+    $table->unsignedBigInteger('id_criteria');
+    $table->float('value');
 
-        // Create sample_topsis table with matching foreign key types
-        Schema::create('sample_topsis', function (Blueprint $table) {
-            $table->id('id_sample');
-            $table->unsignedBigInteger('id_alternative');
-            $table->unsignedBigInteger('id_criteria');
+    // Foreign key constraints
+    $table->foreign('id_alternative')
+          ->references('id_alternative')
+          ->on('alternative_topsis')
+          ->onDelete('cascade');
 
-            $table->foreign('id_alternative')
-                  ->references('id_alternative')
-                  ->on('alternative_topsis')
-                  ->onDelete('cascade');
-
-            $table->foreign('id_criteria')
-                  ->references('criteria_topsis_id')
-                  ->on('criteria_topsis')
-                  ->onDelete('cascade');
-        });
+    $table->foreign('id_criteria')
+          ->references('criteria_topsis_id')
+          ->on('criteria_topsis')
+          ->onDelete('cascade');
+});
     }
 
     public function down()
