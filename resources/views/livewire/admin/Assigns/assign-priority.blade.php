@@ -46,19 +46,45 @@
             </div>
           @endforeach
         @else
-          @foreach ($alternativeInputs as $index => $input)
-            <div>
-              <label class="text-sm text-gray-700 dark:text-white">Alternative</label>
-              <input type="text" wire:model="alternativeInputs.{{ $index }}.alternative" class="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400" />
-            </div>
-          @endforeach
+@foreach ($alternativeInputs as $index => $input)
+    <div class="relative">
+        <label class="text-sm text-gray-700 dark:text-white">Search Facility Name</label>
+<input type="text"
+    wire:model="reportSearch.{{ $index }}"
+    wire:input="searchReports({{ $index }})"
+    class="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
+    placeholder="Search for a facility..." />
+
+
+        <!-- Dropdown -->
+@if (!empty($reportResults[$index]))
+    <ul class="border border-gray-300 bg-white dark:bg-neutral-800 mt-1 rounded-md shadow-lg z-50 absolute w-full max-h-40 overflow-auto">
+        @foreach ($reportResults[$index] as $report)
+            <li wire:click="selectReport({{ $index }}, {{ $report->report_ID }})"
+                class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-neutral-700 cursor-pointer">
+                {{ $report->facility_name }} - {{ $report->report_ID }}
+            </li>
+        @endforeach
+    </ul>
+@endif
+
+    </div>
+@endforeach
+
         @endif
       </div>
 
-      <!-- Submit Button -->
-      <div>
-        <button type="submit" class="w-full py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm">Submit</button>
-      </div>
+<!-- Submit & Clear Buttons -->
+<div class="flex justify-between space-x-2">
+  <button type="submit" class="py-2 px-3 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
+    Submit
+  </button>
+
+  <button type="button" wire:click="clearAll" class="py-2 px-3 bg-red-600 text-white rounded hover:bg-red-700 text-sm">
+    Clear
+  </button>
+</div>
+
 
       <!-- Success Message -->
       @if (session()->has('message'))

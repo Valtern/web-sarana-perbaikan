@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\CriteriaTopsis;
 use App\Models\AlternativeTopsis;
 use App\Models\SampleTopsis;
+use App\Models\Report;
 
 class AssignPriority extends Component
 {
@@ -15,6 +16,10 @@ class AssignPriority extends Component
     public $criteriaInputs = [];
     public $alternativeInputs = [];
     public $sampleValues = []; // matrix: [alternative_id][criteria_id] => value
+
+public $reportSearch = [];
+public $reportResults = [];
+
 
     public function mount()
     {
@@ -84,6 +89,64 @@ class AssignPriority extends Component
         }
         session()->flash('message', 'Sample matrix saved successfully!');
     }
+
+    public function clearAll()
+{
+    if ($this->mode === 'criteria') {
+        $criteria = CriteriaTopsis::all();
+        foreach ($criteria as $item) {
+            $item->delete();
+        }
+        session()->flash('message', 'All criteria have been deleted.');
+    }
+
+    if ($this->mode === 'alternative') {
+        $alternatives = AlternativeTopsis::all();
+        foreach ($alternatives as $item) {
+            $item->delete();
+        }
+        session()->flash('message', 'All alternatives have been deleted.');
+    }
+
+    if ($this->mode === 'sample') {
+        $samples = SampleTopsis::all();
+        foreach ($samples as $item) {
+            $item->delete();
+        }
+        session()->flash('message', 'All sample matrix data has been deleted.');
+    }
+
+    $this->numberOfInputs = 1;
+    $this->resetExcept(['mode']);
+}
+
+public function searchReports($index)
+{
+    $value = $this->reportSearch[$index] ?? '';
+
+    if (strlen($value) > 1) {
+        $this->reportResults[$index] = Report::where('facility_name', 'like', "%{$value}%")
+            ->limit(5)
+            ->get();
+    } else {
+        $this->reportResults[$index] = [];
+    }
+}
+
+
+public function selectReport($index, $reportId)
+{
+    $report = Report::find($reportId);
+    if ($report) {
+        $this->alternativeInputs[$index] = [
+            'alternative' => "{$report->facility_name} - {$report->report_ID}",
+            'report_id' => $report->report_ID,
+        ];
+        $this->reportSearch[$index] = "{$report->facility_name} - {$report->report_ID}";
+        $this->reportResults[$index] = [];
+    }
+}
+
 
     public function render()
     {
