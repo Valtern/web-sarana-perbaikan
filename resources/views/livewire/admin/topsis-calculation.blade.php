@@ -32,12 +32,19 @@
                 </div>
             @endforeach
 
-            <div class="bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded-lg p-4 shadow">
-                <h3 class="text-base font-semibold text-green-700 dark:text-green-400 mb-1">✅ Best Alternative:</h3>
-                <p class="text-sm text-green-800 dark:text-green-300">
-                    {{ $steps['result']['alternative'] ?? '-' }} with score {{ $steps['result']['score'] ?? '-' }}
-                </p>
-            </div>
+<div class="bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded-lg p-4 shadow">
+    <h3 class="text-base font-semibold text-green-700 dark:text-green-400 mb-2">✅ TOPSIS Rankings (Best to Worst):</h3>
+<ul class="list-decimal pl-5 space-y-1 text-sm text-green-800 dark:text-green-300">
+    @foreach ($steps['result'] as $ranking)
+        <li>
+            {{ $ranking['alternative'] }} — Score: {{ number_format($ranking['score'], 4) }} —
+            Priority: <span class="font-semibold">{{ $ranking['priority'] }}</span>
+        </li>
+    @endforeach
+</ul>
+
+</div>
+
         </div>
     @endif
 </div>

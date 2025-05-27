@@ -74,7 +74,7 @@ $statusLabels = [
   @endif
 </td>
     <td class="px-6 py-3 text-sm text-gray-800 dark:text-neutral-200">
-      {{ $repair->report->priority_Assignment ?? 'N/A' }}
+      {{ $repair->priority_Assignment ?? 'N/A' }}
     </td>
 <td class="px-6 py-3 text-sm text-gray-800 dark:text-neutral-200">
   @if($repair->notes)

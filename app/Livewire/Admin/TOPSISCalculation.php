@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\CriteriaTopsis;
 use App\Models\AlternativeTopsis;
 use App\Models\SampleTopsis;
+use App\Models\Repair;
 
 class TOPSISCalculation extends Component
 {
@@ -114,15 +115,49 @@ class TOPSISCalculation extends Component
 
         $this->steps['preference'] = $preference;
 
-        // Step 8: Determine the best alternative
-        arsort($preference);
-        $bestAlternativeId = array_key_first($preference);
-        $bestAlternative = AlternativeTopsis::find($bestAlternativeId);
+// Step 8: Determine rankings
+arsort($preference); // Sort from best to worst
 
-        $this->steps['result'] = [
-            'alternative' => $bestAlternative ? $bestAlternative->alternative : 'N/A',
-            'score' => $preference[$bestAlternativeId] ?? 0,
-        ];
+$rankings = [];
+$total = count($preference);
+$thresholdHigh = ceil($total * 0.3);
+$thresholdMedium = ceil($total * 0.6);
+$currentRank = 1;
+
+foreach ($preference as $altId => $score) {
+    $alt = AlternativeTopsis::find($altId);
+
+    // Determine priority based on rank
+    $priority = Repair::PRIORITY_LOW;
+    if ($currentRank === 1) {
+        $priority = Repair::PRIORITY_VERY_HIGH;
+    } elseif ($currentRank <= $thresholdHigh) {
+        $priority = Repair::PRIORITY_HIGH;
+    } elseif ($currentRank <= $thresholdMedium) {
+        $priority = Repair::PRIORITY_MEDIUM;
+    }
+
+    // Update related repair (assuming alternative name matches something in Repair)
+    // You may want to adjust this if you link via ID instead
+    $repair = \App\Models\Repair::where('facility_report_id', $alt->id_alternative)->first();
+    if ($repair) {
+        $repair->priority_Assignment = $priority;
+        $repair->save();
+    }
+
+    // Save ranking info
+    $rankings[] = [
+        'alternative' => $alt ? $alt->alternative : 'Unknown',
+        'score' => $score,
+        'priority' => $priority,
+    ];
+
+    $currentRank++;
+}
+
+$this->steps['result'] = $rankings;
+
+
 
         $this->calculated = true;
     }
