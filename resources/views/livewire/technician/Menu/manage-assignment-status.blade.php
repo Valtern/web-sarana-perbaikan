@@ -18,10 +18,10 @@ $statusLabels = [
             <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
               <div>
                 <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                  History
+                  Repairs Assignment
                 </h2>
                 <p class="text-sm text-gray-600 dark:text-neutral-400">
-                  List of submitted reports with status, time, and proof for each facility issue.
+                  List of assigned repairs by the admin.
                 </p>
               </div>
             </div>
@@ -74,7 +74,7 @@ $statusLabels = [
   @endif
 </td>
     <td class="px-6 py-3 text-sm text-gray-800 dark:text-neutral-200">
-      {{ $repair->priority_Assignment ?? 'N/A' }}
+      {{ $repair->report->priority_Assignment ?? 'N/A' }}
     </td>
 <td class="px-6 py-3 text-sm text-gray-800 dark:text-neutral-200">
   @if($repair->notes)

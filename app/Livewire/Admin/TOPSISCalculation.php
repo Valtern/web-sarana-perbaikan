@@ -128,32 +128,32 @@ foreach ($preference as $altId => $score) {
     $alt = AlternativeTopsis::find($altId);
 
     // Determine priority based on rank
-    $priority = Repair::PRIORITY_LOW;
+    $priority = 'Low'; // default
     if ($currentRank === 1) {
-        $priority = Repair::PRIORITY_VERY_HIGH;
+        $priority = 'Very High';
     } elseif ($currentRank <= $thresholdHigh) {
-        $priority = Repair::PRIORITY_HIGH;
+        $priority = 'High';
     } elseif ($currentRank <= $thresholdMedium) {
-        $priority = Repair::PRIORITY_MEDIUM;
+        $priority = 'Medium';
     }
 
-    // Update related repair (assuming alternative name matches something in Repair)
-    // You may want to adjust this if you link via ID instead
-    $repair = \App\Models\Repair::where('facility_report_id', $alt->id_alternative)->first();
-    if ($repair) {
-        $repair->priority_Assignment = $priority;
-        $repair->save();
-    }
+    // Update related report based on alternative ID (assuming it's report_ID)
+$report = $alt->report; // cleaner if relationship exists
+if ($report) {
+    $report->priority_Assignment = $priority;
+    $report->save();
+}
 
-    // Save ranking info
+
     $rankings[] = [
-        'alternative' => $alt ? $alt->alternative : 'Unknown',
+        'alternative' => $alt->alternative ?? 'Unknown',
         'score' => $score,
         'priority' => $priority,
     ];
 
     $currentRank++;
 }
+
 
 $this->steps['result'] = $rankings;
 

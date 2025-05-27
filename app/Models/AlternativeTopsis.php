@@ -13,7 +13,13 @@ class AlternativeTopsis extends Model
     protected $primaryKey = 'id_alternative';
     public $timestamps = false;
 
-    protected $fillable = ['alternative'];
+    protected $fillable = ['alternative', 'report_id']; // Include report_id if needed
+
+    // One Alternative belongs to a Report
+    public function report()
+    {
+        return $this->belongsTo(Report::class, 'report_id');
+    }
 
     // One Alternative has many SampleTopsis entries
     public function samples()

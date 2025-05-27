@@ -44,6 +44,12 @@ class Report extends Model
         return $this->hasMany(Repair::class, 'facility_report_id', 'report_ID');
     }
 
+    public function alternatives()
+{
+    return $this->hasMany(AlternativeTopsis::class, 'report_id');
+}
+
+
     // Kalau kamu hanya ingin satu repair per report:
     // public function repair()
     // {
