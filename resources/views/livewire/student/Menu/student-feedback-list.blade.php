@@ -7,12 +7,12 @@
         Reach us
       </h1>
       <p class="mt-1 md:text-lg text-gray-800 dark:text-neutral-200">
-        We help brands and platforms turn big ideas into beautiful digital products and experiences.
+        We provide experiences by turning big ideas into realit and your feedback helps us do it even better.
       </p>
 
       <div class="mt-8">
         <h2 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">
-          What can I expect?
+          What can we expect?
         </h2>
 
         <ul class="mt-2 space-y-2">
@@ -38,23 +38,7 @@
           </li>
         </ul>
       </div>
-      <div class="mt-10 flex items-center gap-x-5">
-        <!-- Avatar Group -->
-        <div class="flex -space-x-2">
-          <img class="inline-block size-8 rounded-full ring-2 ring-white dark:ring-neutral-900" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar">
-          <img class="inline-block size-8 rounded-full ring-2 ring-white dark:ring-neutral-900" src="https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2.5&w=320&h=320&q=80" alt="Avatar">
-          <img class="inline-block size-8 rounded-full ring-2 ring-white dark:ring-neutral-900" src="https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=3&w=320&h=320&q=80" alt="Avatar">
-          <span class="inline-flex justify-center items-center size-8 rounded-full bg-blue-600 text-white ring-2 ring-white">
-            <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-            </svg>
-          </span>
-        </div>
-        <!-- End Avatar Group -->
-        <span class="text-sm text-gray-500 dark:text-neutral-500">
-          Trusted by over 37k customer
-        </span>
-      </div>
+    
     </div>
     <!-- End Col -->
 
@@ -65,62 +49,49 @@
           Fill in the form
         </h2>
 
-        <form>
-          <div class="mt-6 grid gap-4 lg:gap-6">
-            <!-- Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
-              <div>
-                <label for="hs-firstname-hire-us-1" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">First Name</label>
-                <input type="text" name="hs-firstname-hire-us-1" id="hs-firstname-hire-us-1" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-              </div>
+       <form wire:submit.prevent="submit">
+  <div class="mt-6 grid gap-4 lg:gap-6">
 
-              <div>
-                <label for="hs-lastname-hire-us-1" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Last Name</label>
-                <input type="text" name="hs-lastname-hire-us-1" id="hs-lastname-hire-us-1" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-              </div>
-            </div>
-            <!-- End Grid -->
+    <!-- Repair ID and Rating -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
+      <div>
+        <label for="repairs_ID" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Repair ID</label>
+        <input type="text" wire:model="repairs_ID" id="repairs_ID"
+               class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm
+                      focus:border-blue-500 focus:ring-blue-500
+                      disabled:opacity-50 disabled:pointer-events-none
+                      dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400
+                      dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+        @error('repairs_ID') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+      </div>
 
-            <div>
-              <label for="hs-work-email-hire-us-1" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Work Email</label>
-              <input type="email" name="hs-work-email-hire-us-1" id="hs-work-email-hire-us-1" autocomplete="email" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-            </div>
+      <div>
+        <label for="rate" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Rating (1–5)</label>
+        <input type="number" min="1" max="5" wire:model="rate" id="rate"
+               class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm
+                      focus:border-blue-500 focus:ring-blue-500
+                      disabled:opacity-50 disabled:pointer-events-none
+                      dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400
+                      dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+        @error('rate') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+      </div>
+    </div>
 
-            <!-- Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
-              <div>
-                <label for="hs-company-hire-us-1" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Company</label>
-                <input type="text" name="hs-company-hire-us-1" id="hs-company-hire-us-1" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-              </div>
+    <!-- Feedback Text -->
+    <div>
+      <label for="feedback_content" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Your Feedback</label>
+      <textarea wire:model="feedback_content" id="feedback_content" rows="4"
+                class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm
+                       focus:border-blue-500 focus:ring-blue-500
+                       disabled:opacity-50 disabled:pointer-events-none
+                       dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400
+                       dark:placeholder-neutral-500 dark:focus:ring-neutral-600"></textarea>
+      @error('feedback_content') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+    </div>
 
-              <div>
-                <label for="hs-company-website-hire-us-1" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Company Website</label>
-                <input type="text" name="hs-company-website-hire-us-1" id="hs-company-website-hire-us-1" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-              </div>
-            </div>
-            <!-- End Grid -->
-
-            <div>
-              <label for="hs-about-hire-us-1" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Details</label>
-              <textarea id="hs-about-hire-us-1" name="hs-about-hire-us-1" rows="4" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"></textarea>
-            </div>
-          </div>
-        </form>
-        <!-- End Grid -->
-
-        <!-- Checkbox -->
-        <div class="mt-3 flex">
-          <div class="flex">
-            <input id="remember-me" name="remember-me" type="checkbox" class="shrink-0 mt-1.5 border-gray-200 rounded-sm text-blue-600 focus:ring-blue-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800">
-          </div>
-          <div class="ms-3">
-            <label for="remember-me" class="text-sm text-gray-600 dark:text-neutral-400">By submitting this form I have read and acknowledged the <a class="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500" href="#">Privacy policy</a></label>
-          </div>
-        </div>
-        <!-- End Checkbox -->
-
-        <div class="mt-6 grid">
-          <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">Send inquiry</button>
+    <!-- Submit Button -->
+    <div class="mt-6 grid">
+          <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">Submit Feedback</button>
         </div>
 
         <div class="mt-3 text-center">
@@ -128,6 +99,23 @@
             We'll get back to you in 1-2 business days.
           </p>
         </div>
+
+    <!-- Success Message -->
+    @if (session()->has('success'))
+      <div class="mt-4 bg-green-100 text-green-700 p-3 rounded">
+        {{ session('success') }}
+      </div>
+    @endif
+
+  </div>
+</form>
+
+        <!-- End Grid -->
+
+    
+        <!-- End Checkbox -->
+
+        
       </div>
       <!-- End Card -->
     </div>

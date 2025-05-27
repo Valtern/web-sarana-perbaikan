@@ -10,6 +10,7 @@ class ReportManagement extends Component
     public $searchTerm = '';
     public $startDate;
     public $endDate;
+    public $reports;
 
     public function render()
     {
@@ -32,14 +33,16 @@ class ReportManagement extends Component
         ]);
     }
 
-public function updateStatus($reportId, $newStatus)
+public function updateStatus($report_ID, $newStatus)
 {
-    DB::table('report')->where('report_ID', $reportId)->update(['status' => $newStatus]);
+    DB::table('report')->where('report_ID', $report_ID)->update(['status' => $newStatus]);
 }
 
-public function deleteReport($reportId)
+public function deleteReport($report_ID)
 {
-    DB::table('report')->where('report_ID', $reportId)->delete();
+    DB::table('repairs')->where('facility_report_id', $report_ID)->delete(); // hapus dulu yang terkait
+    DB::table('report')->where('report_ID', $report_ID)->delete(); // baru hapus laporan
 }
+
 
 }

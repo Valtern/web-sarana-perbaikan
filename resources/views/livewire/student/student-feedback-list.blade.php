@@ -7,7 +7,7 @@
         Reach us
       </h1>
       <p class="mt-1 md:text-lg text-gray-800 dark:text-neutral-200">
-        We help brands and platforms turn big ideas into beautiful digital products and experiences.
+        We craft beautiful digital products and experiences by turning big ideas into realit and your feedback helps us do it even better.
       </p>
 
       <div class="mt-8">
