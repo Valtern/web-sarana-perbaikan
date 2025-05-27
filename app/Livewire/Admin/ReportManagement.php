@@ -11,6 +11,8 @@ class ReportManagement extends Component
     public $startDate;
     public $endDate;
     public $reports;
+    public $statusUpdates = [];
+
 
     public function render()
     {
@@ -31,12 +33,25 @@ class ReportManagement extends Component
         return view('livewire.admin.Menu.report.report-management', [
             'reports' => $this->reports
         ]);
+        foreach ($this->reports as $report) {
+    $this->statusUpdates[$report->report_ID] = $report->status;
+}
+
     }
 
 public function updateStatus($reportId, $newStatus)
 {
     DB::table('report')->where('report_ID', $reportId)->update(['status' => $newStatus]);
 }
+public function updatedStatusUpdates($value, $key)
+{
+    $reportId = $key;
+    $this->updateStatus($reportId, $value);
+
+    // Reset the dropdown to "Select..." (empty string)
+    $this->statusUpdates[$reportId] = '';
+}
+
 
 public function deleteReport($reportId)
 {

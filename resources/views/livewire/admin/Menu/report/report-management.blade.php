@@ -59,17 +59,19 @@
       {{ Str::headline(str_replace('_', ' ', $report->status)) }}
     </span>
 
-    <select wire:change="updateStatus({{ $report->report_ID }}, $event.target.value)"
-            class="text-xs rounded-md border-gray-300 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
-      <option value="" disabled selected hidden>Change</option>
-      @foreach(['Pending', 'In_progress', 'Solved', 'Declined'] as $status)
-        @if ($report->status !== $status)
-          <option value="{{ $status }}">
-            {{ Str::headline(str_replace('_', ' ', $status)) }}
-          </option>
+<select wire:model="statusUpdates.{{ $report->report_ID }}"
+        class="text-xs rounded-md border-gray-300 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
+    <option value="" disabled>Select...</option>
+    @foreach(['Pending', 'In_progress', 'Solved', 'Declined'] as $status)
+        @if ($status !== $report->status)
+            <option value="{{ $status }}">
+                {{ Str::headline(str_replace('_', ' ', $status)) }}
+            </option>
         @endif
-      @endforeach
-    </select>
+    @endforeach
+</select>
+
+
   </div>
 </td>
 
