@@ -17,7 +17,7 @@
           Fill in the form
         </h2>
 
-@livewire('student.submit-report')
+        @livewire('student.submit-report')
 
 
 
@@ -57,14 +57,9 @@
           </div>
         </div>
         <!-- End Icon Block -->
-
-
-
       </div>
     </div>
-  </div>
-    
-
+  </div>    
 </div>
          <!-- Table -->
          @livewire('student.report-history')

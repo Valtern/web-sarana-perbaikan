@@ -9,13 +9,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Masmerise\Toaster\Toaster;
 
-
-
 class SubmitReport extends Component
 {
     use WithFileUploads;
+    public $facility_name, $location, $description, $category, $picture_proof, $weight =[];
 
-    public $facility_name, $location, $description, $category, $picture_proof;
 
     protected $rules = [
         'facility_name' => 'required|string|max:50',
@@ -23,6 +21,9 @@ class SubmitReport extends Component
         'description' => 'nullable|string|max:200',
         'category' => 'required|in:Electronic,Table,Chair,Desk,Computer,Miscellaneous',
         'picture_proof' => 'nullable|image|max:2048',
+        'weight' => 'nullable|array',
+        'weight.*' => 'in:Severity of Damage,Impact on Academic Activities,Frequency of Facility Usage,Estimated Repair Time,Estimated Repair Cost,Urgency Level',
+
     ];
 
 public function submit()
@@ -32,8 +33,12 @@ public function submit()
     $imagePath = null;
 
     if ($this->picture_proof) {
+        $sizeInBytes = $this->picture_proof->getSize();
+        $sizeInKB = round($sizeInBytes / 1024, 2);
+        Toaster::info("Ukuran gambar: {$sizeInKB} KB");
+
         $filename = time() . '_' . Str::slug($this->picture_proof->getClientOriginalName());
-        $imagePath = $this->picture_proof->storeAs('proof', $filename, 'public');
+        $imagePath = $this->picture_proof->storeAs('public/photos', $filename);
     }
 
     Report::create([
@@ -42,19 +47,18 @@ public function submit()
         'location' => $this->location,
         'description' => $this->description,
         'category' => $this->category,
-        'picture_proof' => $imagePath ? "storage/{$imagePath}" : null,
+        'picture_proof' => $imagePath,
+        'weight' => $this->weight, // pastikan Report model meng-cast ini ke array
     ]);
 
-    $this->reset(['facility_name', 'location', 'description', 'category', 'picture_proof']);
+    $this->reset(['facility_name', 'location', 'description', 'category', 'picture_proof', 'weight']);
 
-    // Fire toaster event
-    Toaster::success('User updated successfully!');
-
-
+    Toaster::success('Laporan berhasil dikirim!');
     $this->dispatch('report-submitted');
 }
 
-    public function render()
+
+public function render()
     {
         return view('livewire.student.submit-report');
     }

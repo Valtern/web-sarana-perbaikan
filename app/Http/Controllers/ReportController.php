@@ -17,6 +17,8 @@ public function store(Request $request)
         'description' => 'nullable|string|max:200',
         'category' => 'required|in:Electronic,Table,Chair,Desk,Computer,Miscellaneous',
         'picture_proof' => 'nullable|image|max:2048',
+        'weight' => 'nullable|array',
+        'weight.*' => 'in:Severity of Damage,Impact on Academic Activities,Frequency of Facility Usage,Estimated Repair Time,Estimated Repair Cost,Urgency Level',
     ]);
 
     $imagePath = null;
@@ -35,6 +37,7 @@ public function store(Request $request)
         'description' => $request->description,
         'category' => $request->category,
         'picture_proof' => $imagePath,
+        'weight' => $request->weight,
     ]);
 
     return redirect()->back()->with('success', 'Report submitted successfully.');

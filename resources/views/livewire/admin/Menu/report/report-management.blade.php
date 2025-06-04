@@ -1,47 +1,64 @@
-<div wire:poll.keep-alive.10s>
-<div class="mb-6 border border-gray-300 dark:border-neutral-700 rounded-lg bg-white dark:bg-neutral-900 p-4">
-  <h2 class="text-lg font-semibold text-gray-800 dark:text-neutral-200 mb-4">Search & Filter Reports</h2>
-  <div class="flex flex-col sm:flex-row gap-4 sm:items-end">
-    <div class="flex-1">
-      <label class="block text-sm font-medium text-gray-700 dark:text-neutral-300">Search by Name</label>
-      <input type="text" wire:model.debounce.500ms="searchTerm" class="mt-1 block w-150 rounded-md  border-gray-300 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white" placeholder="Enter name...">
-    </div>
+<div>
+ <div class="max-w-[rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <!-- Card -->
+    <div class="flex flex-col">
+      <div class="-m-1.5 overflow-x-auto">
+        <div class="p-1.5 min-w-full inline-block align-middle">
+          <div class="bg-white border border-gray-200 rounded-xl shadow-2xs overflow-hidden dark:bg-neutral-900 dark:border-neutral-700">
+            <!-- Header -->
+            <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
+              <div>
+                <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
+                  Report Management
+                </h2> 
+                              
+                <p class="text-sm text-gray-600 dark:text-neutral-400">
+                  Manage all facility items in your system. Track status and location of 
+                  <a class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500" href="#">
+                    equipment and resources.
+                  </a>
+                </p>
+              </div>
+            </div>
+            <!-- End Header -->
 
-    <div>
-      <label class="block text-sm font-medium text-gray-700 dark:text-neutral-300">Start Date</label>
-      <input type="date" wire:model="startDate" class="mt-1 block w-full rounded-md  border-gray-300 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
-    </div>
-
-    <div>
-      <label class="block text-sm font-medium text-gray-700 dark:text-neutral-300">End Date</label>
-      <input type="date" wire:model="endDate" class="mt-1 block w-full rounded-md  border-gray-300 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
-    </div>
-  </div>
-  <button type="button" onclick="document.getElementById('summaryModal').classList.remove('hidden')"
-    class="mt-4 inline-flex items-center gap-x-2 rounded-lg bg-green-600 px-4 py-2 text-white shadow hover:bg-green-700">
-    View Report Summary
-</button>
-
-</div>
-
-
- <div class="flex flex-col">
-  <div class="-m-1.5 overflow-x-auto">
-    <div class="p-1.5 min-w-full inline-block align-middle">
-      <div class="overflow-hidden rounded-xl border border-gray-200 dark:border-neutral-700">
-        <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-          <thead class="bg-gray-50 dark:bg-neutral-900">
+            <!-- Table -->
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                <thead class="bg-gray-50 dark:bg-neutral-900">
             <tr>
-              <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">#</th>
-              <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Reporter</th>
-              <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Facility</th>
-              <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Location</th>
-              <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Category</th>
-              <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Status</th>
-              <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Reported At</th>
-              <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Description</th>
-              <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Proof</th>
-              <th class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Actions</th>
+                <th scope="col" class="px-6 py-3 text-start">
+                    <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">ID</span>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                    <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Reporter</span>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                    <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Facility</span>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                    <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Building</span>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                    <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Category</span>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                    <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Weight</span>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                    <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Status</span>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                    <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Reported At</span>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                    <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Description</span>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                    <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Proof</span>
+                </th>
+                <th scope="col" class="px-6 py-3 text-start">
+                    <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Action</span>
+                </th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
@@ -52,53 +69,59 @@
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $report->facility_name }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $report->location }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $report->category }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">
-                  @php
-                    $statusColors = [
-                      'Pending' => 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
-                      'Declined' => 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
-                      'In_progress' => 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
-                      'Solved' => 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
-                    ];
-                  @endphp
-                  <div class="flex items-center gap-2">
-                    <span class="text-xs font-semibold px-2 py-1 rounded-full {{ $statusColors[$report->status] ?? 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200' }}">
-                      {{ Str::headline(str_replace('_', ' ', $report->status)) }}
-                    </span>
-                    <select wire:model="statusUpdates.{{ $report->report_ID }}"
-                            class="text-xs rounded-md border-gray-300 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
-                      <option value="" disabled>Select...</option>
-@foreach(['Pending', 'In_progress', 'Solved', 'Declined'] as $status)
-  <option value="{{ $status }}">
-    {{ Str::headline(str_replace('_', ' ', $status)) }}
-  </option>
-@endforeach
-                    </select>
-                  </div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
-                  {{ \Carbon\Carbon::parse($report->created_at)->format('d M, H:i') }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm">
-                  <button type="button" onclick="openDescriptionModal(@js($report->description))"
-                          class="inline-flex items-center gap-x-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800 px-3 py-1.5 dark:bg-gray-700 dark:text-white hover:underline">
+
+                <td class="px-2 py-2 text-sm text-gray-800 dark:text-neutral-200 break-words" style="max-width: 120px; word-break: break-word; white-space: normal;"><button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-yellow-100 text-yellow-800 hover:bg-yellow-200 focus:outline-hidden focus:bg-yellow-200 disabled:opacity-50 disabled:pointer-events-none dark:text-yellow-500 dark:bg-yellow-800/30 dark:hover:bg-yellow-800/20 dark:focus:bg-yellow-800/20" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-weight-modal" data-hs-overlay="#hs-weight-modal">
                     View
                   </button>
                 </td>
+
+                 <td class="px-6 py-4 whitespace-nowrap text-sm">
+                  <div class="hs-dropdown relative inline-flex [--placement:bottom]">
+                      <button id="hs-dropdown-status-{{ $report->report_ID }}"
+                              type="button"
+                              class="hs-dropdown-toggle inline-flex justify-center items-center gap-x-2 text-xs rounded-md border border-gray-300 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white px-3 py-2">
+                          {{ Str::headline(str_replace('_', ' ', $statusUpdates[$report->report_ID] ?? 'Pending')) }}
+                          <svg class="hs-dropdown-open:rotate-180 w-2.5 h-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                          </svg>
+                      </button>
+
+                      <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden z-10 mt-2 min-w-[8rem] bg-white dark:bg-neutral-800 shadow-lg rounded-lg p-2 border border-gray-200 dark:border-neutral-700"
+                          aria-labelledby="hs-dropdown-status-{{ $report->report_ID }}">
+                          @foreach(['Pending', 'In_progress', 'Solved', 'Declined'] as $status)
+                              <button wire:click="updateStatusWithValue({{ $report->report_ID }}, '{{ $status }}')"
+                                      class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                  {{ Str::headline(str_replace('_', ' ', $status)) }}
+                              </button>
+                          @endforeach
+                      </div>
+                  </div>
+              </td>
+
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                  {{ \Carbon\Carbon::parse($report->created_at)->format('d M, H:i') }}
+                </td>
+
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                  <button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-100 text-teal-800 hover:bg-teal-200 focus:outline-hidden focus:bg-teal-200 disabled:opacity-50 disabled:pointer-events-none dark:text-teal-500 dark:bg-teal-800/30 dark:hover:bg-teal-800/20 dark:focus:bg-teal-800/20" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-description-modal" data-hs-overlay="#hs-description-modal">
+                    View
+                  </button>
+                </td>
+
                 <td class="px-6 py-4 whitespace-nowrap text-sm">
                   @if($report->picture_proof)
-                    <button type="button" onclick="openProofModal(@js(url($report->picture_proof)))"
-                            class="inline-flex items-center gap-x-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 px-3 py-1.5 dark:bg-blue-500/10 dark:text-blue-500 hover:underline">
-                      View Proof
-                    </button>
+                    <button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-hidden focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-400 dark:bg-blue-800/30 dark:hover:bg-blue-800/20 dark:focus:bg-blue-800/20" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-vertically-centered-modal" data-hs-overlay="#hs-vertically-centered-modal">
+                    View
+                  </button>
                   @else
                     <span class="text-xs text-gray-400 italic">No image</span>
                   @endif
                 </td>
+
                 <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                   <button wire:click="deleteReport({{ $report->report_ID }})"
                           onclick="return confirm('Are you sure you want to delete this report?')"
-                          class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 dark:text-red-500 dark:hover:text-red-400">
+                          class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-100 text-red-800 hover:bg-red-200 focus:outline-hidden focus:bg-red-200 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:bg-red-800/30 dark:hover:bg-red-800/20 dark:focus:bg-red-800/20">
                     Delete
                   </button>
                 </td>
@@ -112,95 +135,80 @@
 </div>
 
 
-  <!-- Image Modal -->
-  <div id="proofModal" class="fixed hidden inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-    <div class="relative">
-      <button onclick="closeProofModal()" class="absolute top-0 right-0 m-4 text-white text-2xl">&times;</button>
-      <img id="proofImage" class="max-w-full max-h-[90vh] rounded-lg" src="" alt="Proof Image">
+<!-- Image Modal -->
+<div id="hs-vertically-centered-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-80 overflow-x-hidden overflow-y-auto pointer-events-none" role="dialog" tabindex="-1" aria-labelledby="hs-vertically-centered-modal-label">
+  <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-56px)] flex items-center">
+    <div class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+      <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
+        <h3 id="hs-vertically-centered-modal-label" class="font-bold text-gray-800 dark:text-white">
+          Detail Laporan
+        </h3>
+        <button type="button" class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600" aria-label="Close" data-hs-overlay="#hs-vertically-centered-modal">
+          <span class="sr-only">Close</span>
+          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="p-4 overflow-y-auto space-y-4 text-gray-800 dark:text-neutral-400">
+        @if ($report->picture_proof)
+          <div>
+            <strong>Picture Proof:</strong><br>
+            <img src="{{ Storage::url($report->picture_proof) }}" alt="Bukti kerusakan" class="max-w-full rounded-lg border border-gray-300 dark:border-neutral-600 shadow" />
+          </div>
+        @else
+          <p><em>Tidak ada foto bukti.</em></p>
+        @endif
+      </div>
     </div>
   </div>
+</div>
 
-  <!-- Description Modal -->
-  <div id="descriptionModal" class="fixed hidden inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 max-w-md mx-auto shadow-xl relative">
-      <button onclick="closeDescriptionModal()" class="absolute top-2 right-3 text-gray-500 hover:text-red-600 text-xl">&times;</button>
-      <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Report Description</h3>
-      <p id="descriptionText" class="text-gray-700 dark:text-gray-300 whitespace-pre-line"></p>
+
+<!-- Description Modal -->
+<div id="hs-description-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-80 overflow-x-hidden overflow-y-auto pointer-events-none" role="dialog" tabindex="-1" aria-labelledby="hs-description-modal-label">
+  <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-56px)] flex items-center">
+    <div class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+      <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
+        <h3 id="hs-description-modal-label" class="font-bold text-gray-800 dark:text-white">
+          Report Description
+        </h3>
+        <button type="button" class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600" aria-label="Close" data-hs-overlay="#hs-description-modal">
+          <span class="sr-only">Close</span>
+          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="p-4 overflow-y-auto text-gray-800 dark:text-neutral-400 space-y-4">
+        <p>{{ $report->description ?? 'Tidak ada deskripsi tersedia.' }}</p>
+      </div>
     </div>
   </div>
-  <!-- Report Summary Modal -->
-<div id="summaryModal" class="fixed hidden inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-    <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 w-full max-w-lg shadow-xl relative">
-        <button onclick="document.getElementById('summaryModal').classList.add('hidden')"
-            class="absolute top-2 right-3 text-gray-500 hover:text-red-600 text-xl">&times;</button>
+</div>
 
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Report Summary</h3>
-
-        <table class="w-full text-sm text-gray-700 dark:text-gray-200">
-            <tr><td>Total Reports</td><td class="text-right">{{ $summary['total_reports'] }}</td></tr>
-            <tr><td>Incoming Today</td><td class="text-right">{{ $summary['incoming_reports'] }}</td></tr>
-            <tr><td>Most Frequent Reporter</td><td class="text-right">{{ $summary['most_frequent_reporter']->name ?? 'N/A' }}</td></tr>
-            <tr><td>Most Damaged Category</td><td class="text-right">{{ $summary['most_damaged_category']->category ?? 'N/A' }}</td></tr>
-        </table>
-
-        <div class="mt-6 text-end">
-            <button wire:click="exportSummary"
-                class="inline-flex items-center gap-x-2 rounded-lg bg-blue-600 px-4 py-2 text-white shadow hover:bg-blue-700">
-                Download Excel
-            </button>
-        </div>
-        <div class="p-4">
-    <h2 class="text-lg font-semibold mb-2">Damage Summary</h2>
-
-    <div class="mb-4">
-        <p><strong>Least Damaged Category:</strong> {{ $leastDamagedCategory }}</p>
+<div id="hs-weight-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-80 overflow-x-hidden overflow-y-auto pointer-events-none" role="dialog" tabindex="-1" aria-labelledby="hs-weight-modal-label">
+  <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-56px)] flex items-center">
+    <div class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+      <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
+        <h3 id="hs-weight-modal-label" class="font-bold text-gray-800 dark:text-white">
+          Report weight
+        </h3>
+        <button type="button" class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600" aria-label="Close" data-hs-overlay="#hs-weight-modal">
+          <span class="sr-only">Close</span>
+          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="p-4 overflow-y-auto text-gray-800 dark:text-neutral-400 space-y-4">
+        <p>{{ $report->weight ?? 'Tidak ada deskripsi tersedia.' }}</p>
+      </div>
     </div>
-
-    <h3 class="text-md font-semibold mb-2">Most Damaged Categories</h3>
-<div class="overflow-hidden rounded-xl border border-gray-200 dark:border-neutral-700">
-  <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-    <thead class="bg-gray-50 dark:bg-neutral-900">
-      <tr>
-        <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Category</th>
-        <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Total Damage Score</th>
-      </tr>
-    </thead>
-    <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-      @foreach (collect($categoryScores)->sortDesc() as $category => $score)
-        <tr>
-          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $category }}</td>
-          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{ $score }}</td>
-        </tr>
-      @endforeach
-    </tbody>
-  </table>
+  </div>
 </div>
 
-</div>
-
-    </div>
-</div>
-
-
-  <script>
-    function openProofModal(imageUrl) {
-      document.getElementById('proofImage').src = imageUrl;
-      document.getElementById('proofModal').classList.remove('hidden');
-    }
-
-    function closeProofModal() {
-      document.getElementById('proofImage').src = '';
-      document.getElementById('proofModal').classList.add('hidden');
-    }
-
-    function openDescriptionModal(description) {
-      document.getElementById('descriptionText').innerText = description || 'No description provided.';
-      document.getElementById('descriptionModal').classList.remove('hidden');
-    }
-
-    function closeDescriptionModal() {
-      document.getElementById('descriptionText').innerText = '';
-      document.getElementById('descriptionModal').classList.add('hidden');
-    }
-  </script>
 </div>

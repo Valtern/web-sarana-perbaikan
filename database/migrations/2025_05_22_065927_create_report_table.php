@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('report', function (Blueprint $table) {
             $table->id('report_ID');
             $table->unsignedBigInteger('user_ID');
-            $table->enum('priority_Assignment', ['Very High', 'High', 'Medium', 'Low'])->nullable();
+            $table->json('weight')->nullable();
             $table->string('facility_name', 50);
             $table->string('location', 200)->nullable();
             $table->string('description', 200)->nullable();

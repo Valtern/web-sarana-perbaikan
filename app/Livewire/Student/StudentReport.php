@@ -16,49 +16,48 @@ class StudentReport extends Component
     public $description;
     public $category;
     public $picture_proof;
+    public $weight = [];
 
     public $reports;
 
     public function mount()
     {
         $this->reports = Report::with('user')
-            ->where('user_id', auth()->id())
+            ->where('user_ID', auth()->id())
             ->latest()
             ->get();
     }
 
     public function submit()
-    {
-        $this->validate([
-            'facility_name' => 'required|string|max:50',
-            'location' => 'nullable|string|max:200',
-            'description' => 'nullable|string|max:200',
-            'category' => 'required|in:Electronic,Table,Chair,Desk,Computer,Miscellaneous',
-            'picture_proof' => 'nullable|image|max:2048',
-        ]);
+{
+    $this->validate([
+        'facility_name' => 'required|string|max:50',
+        'location' => 'nullable|string|max:200',
+        'description' => 'nullable|string|max:200',
+        'category' => 'required|in:Electronic,Table,Chair,Desk,Computer,Miscellaneous',
+        'picture_proof' => 'nullable|image|max:2048',
+        'weight' => 'nullable|array',
+    ]);
 
-        $imagePath = null;
-
-        if ($this->picture_proof) {
-            $filename = time() . '_' . preg_replace('/\s+/', '_', $this->picture_proof->getClientOriginalName());
-            $this->picture_proof->storeAs('public/proof', $filename); // stores to storage/app/public/proof
-            $imagePath = 'proof/' . $filename;
-        }
-
-        Report::create([
-            'user_ID' => Auth::id(),
-            'facility_name' => $this->facility_name,
-            'location' => $this->location,
-            'description' => $this->description,
-            'category' => $this->category,
-            'picture_proof' => $imagePath,
-        ]);
-
-        // Refresh reports
-        $this->mount(); // reload the reports
-        $this->reset(['facility_name', 'location', 'description', 'category', 'picture_proof']);
-        session()->flash('success', 'Report submitted successfully.');
+    $imagePath = null;
+    if ($this->picture_proof) {
+        $imagePath = $this->picture_proof->store('proof', 'public');
     }
+
+    Report::create([
+        'user_ID' => auth()->id(),
+        'facility_name' => $this->facility_name,
+        'location' => $this->location,
+        'description' => $this->description,
+        'category' => $this->category,
+        'picture_proof' => $imagePath,
+        'weight' => $this->weight,
+    ]);
+
+    session()->flash('success', 'Report submitted successfully.');
+    $this->reset();
+}
+
 
     public function render()
     {

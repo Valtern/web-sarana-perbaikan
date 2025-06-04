@@ -21,6 +21,7 @@ class Report extends Model
         'category',
         'picture_proof',
         'status',
+        'weight',
     ];
 
     protected $attributes = [
@@ -28,6 +29,7 @@ class Report extends Model
     ];
 
     protected $casts = [
+        'weight' => 'array',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
@@ -47,6 +49,14 @@ class Report extends Model
     public function alternatives()
 {
     return $this->hasMany(AlternativeTopsis::class, 'report_id');
+
+}
+
+protected static function booted()
+{
+    static::deleting(function ($report) {
+        $report->repairs()->delete(); // hapus dulu repairs yang terkait
+    });
 }
 
 

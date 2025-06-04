@@ -9,10 +9,13 @@ use Illuminate\Support\Facades\Auth;
 class ManageAssignmentStatus extends Component
 {
     public $repairs;
+    public $repairCount = 0;
+
 
     public function mount()
     {
         $this->loadRepairs();
+        $this->repairCount = $this->repairs->count();
     }
 
     public function loadRepairs()
@@ -57,6 +60,26 @@ public function decline(int $repairId): void
     $repair->update(['repair_status' => $status]);
     $this->loadRepairs(); // optional: refresh list
 }
+
+public function checkNewRepair()
+{
+    $newRepairs = Repair::with('report')
+        ->where('technician_id', Auth::id())
+        ->whereHas('report', function ($query) {
+            $query->where('status', '!=', 'Declined');
+        })
+        ->get();
+
+    if ($newRepairs->count() > $this->repairCount) {
+        $this->dispatch('toast', [
+            'type' => 'info',
+            'message' => '🔔 Ada tugas baru yang masuk!',
+        ]);
+        $this->repairCount = $newRepairs->count();
+        $this->repairs = $newRepairs;
+    }
+}
+
 
 
 

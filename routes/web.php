@@ -104,12 +104,9 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::get('/student/list', StudentBuildingList::class)->name('student.building.list');
     Route::get('/student/facility', StudentFacilityList::class)->name('student.facility.list');
     Route::get('/student/feedback', StudentFeedbackList::class)->name('student.feedback.list');
-    Route::get('/student/view', ViewBuilding::class)->name('student.view-building');
-    Route::get('/student/view-facility', ViewFacility::class)->name('student.view-facility');
     Route::get('/student/report-history', StudentReportHistory::class)->name('student.report-history');
     Route::get('/student/submit-report', StudentSubmitReport::class)->name('student.submit-report');
     // Report store and view
-    Route::post('/report', [ReportController::class, 'store'])->name('report.store');
     Route::get('/student/reports', [ReportController::class, 'index'])->name('student.reports');
 });
 

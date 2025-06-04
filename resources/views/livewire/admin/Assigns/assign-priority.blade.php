@@ -1,5 +1,5 @@
 <div class="min-h-screen flex items-center justify-center px-4 py-10">
-  <div class="w-full max-w-3xl bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-xl p-6 sm:p-10 shadow-lg">
+  <div class="w-full max-w-3xl bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-xl p-6 sm:p-10 ">
     <h2 class="text-2xl font-semibold text-gray-800 dark:text-neutral-200 mb-6">
       Fill in the form
     </h2>
@@ -8,7 +8,7 @@
       <!-- Mode Switch -->
       <div>
         <label class="block text-sm font-medium text-gray-700 dark:text-white">Select Mode:</label>
-        <select wire:model="mode" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
+        <select wire:model="mode" class="mt-1 block w-full rounded-md border-gray-300  focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
 <option value="criteria">Criteria</option>
 <option value="alternative">Alternative</option>
 <option value="sample">Sample Matrix</option>
@@ -19,7 +19,7 @@
       <!-- Number of Inputs -->
       <div>
         <label class="block text-sm font-medium text-gray-700 dark:text-white">Number of {{ ucfirst($mode) }} to Add:</label>
-        <input type="number" min="1" wire:model="numberOfInputs" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400" />
+        <input type="number" min="1" wire:model="numberOfInputs" class="mt-1 block w-full rounded-md border-gray-300  focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400" />
         <button type="button" wire:click="updateFieldCount" class="mt-2 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm">Generate Fields</button>
       </div>
 
@@ -30,15 +30,15 @@
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
                 <label class="text-sm text-gray-700 dark:text-white">Name</label>
-                <input type="text" wire:model="criteriaInputs.{{ $index }}.criteria_name" class="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400" />
+                <input type="text" wire:model="criteriaInputs.{{ $index }}.criteria_name" class="block w-full rounded-md border-gray-300  sm:text-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400" />
               </div>
               <div>
                 <label class="text-sm text-gray-700 dark:text-white">Weight</label>
-                <input type="number" wire:model="criteriaInputs.{{ $index }}.weight" class="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400" />
+                <input type="number" wire:model="criteriaInputs.{{ $index }}.weight" class="block w-full rounded-md border-gray-300  sm:text-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400" />
               </div>
               <div>
                 <label class="text-sm text-gray-700 dark:text-white">Type</label>
-                <select wire:model="criteriaInputs.{{ $index }}.type" class="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
+                <select wire:model="criteriaInputs.{{ $index }}.type" class="block w-full rounded-md border-gray-300  sm:text-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
                   <option value="max">Max</option>
                   <option value="min">Min</option>
                 </select>
@@ -52,7 +52,7 @@
 <input type="text"
     wire:model="reportSearch.{{ $index }}"
     wire:input="searchReports({{ $index }})"
-    class="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
+    class="block w-full rounded-md border-gray-300  sm:text-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
     placeholder="Search for a facility..." />
 
 

@@ -65,18 +65,23 @@ public function render()
 }
 
 
-public function updateStatus($reportId, $newStatus)
+public function updateStatus($reportId)
 {
-    DB::table('report')->where('report_ID', $reportId)->update(['status' => $newStatus]);
-}
-public function updatedStatusUpdates($value, $key)
-{
-    $reportId = $key;
-    $this->updateStatus($reportId, $value);
+    if (isset($this->statusUpdates[$reportId])) {
+        DB::table('report')
+            ->where('report_ID', $reportId)
+            ->update(['status' => $this->statusUpdates[$reportId]]);
 
-    // Reset the dropdown to "Select..." (empty string)
-    $this->statusUpdates[$reportId] = '';
+        session()->flash('message', "Status updated successfully for report ID: $reportId");
+    }
 }
+
+public function updateStatusWithValue($reportId, $status)
+{
+    $this->statusUpdates[$reportId] = $status;
+    $this->updateStatus($reportId);
+}
+
 
 
 public function deleteReport($reportId)
@@ -148,7 +153,6 @@ public function exportSummary()
         return [$category, $score];
     })->values()->toArray();
 
-    return Excel::download(new ReportSummaryExport($summaryData, $damageScores), 'report_summary.xlsx');
 }
 
 public function loadDamageSummary()
