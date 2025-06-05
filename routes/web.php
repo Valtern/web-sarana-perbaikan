@@ -6,6 +6,7 @@ use App\Http\Controllers\ReportController;
 // Settings (shared)
 use App\Livewire\Settings\{Profile, Password, Appearance};
 
+use App\Livewire\faq\{Appearancefaq};
 // Admin
 use App\Livewire\Admin\{
     AdminDashboard,
@@ -145,6 +146,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/profile', Profile::class)->name('settings.profile');
     Route::get('settings/password', Password::class)->name('settings.password');
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::redirect('faq', 'faq/appearancefaq');
+    Route::get('faq/appearancefaq', Appearancefaq::class)->name('faq.appearancefaq');
 });
 
 // Auth scaffolding
