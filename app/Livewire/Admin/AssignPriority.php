@@ -37,6 +37,7 @@ public $reportResults = [];
             ],
             'alternative' => [
                 'alternativeInputs.*.alternative' => 'required|string|max:100',
+                 'alternativeInputs.*.report_id' => 'nullable|integer|exists:report,report_ID',
             ],
             default => [],
         };
@@ -79,6 +80,10 @@ public $reportResults = [];
 
     public function submitSampleValues()
     {
+       if (empty($this->sampleValues)) {
+        session()->flash('error', 'Cannot save: Sample matrix is empty.');
+        return;
+    }
         foreach ($this->sampleValues as $alternativeId => $criteriaArray) {
             foreach ($criteriaArray as $criteriaId => $value) {
                 SampleTopsis::updateOrCreate(
@@ -146,6 +151,25 @@ public function selectReport($index, $reportId)
         $this->reportResults[$index] = [];
     }
 }
+public function addAllReportsAsAlternatives()
+{
+    $reports = Report::all();
+
+    $this->alternativeInputs = [];
+    $this->reportSearch = [];
+
+    foreach ($reports as $index => $report) {
+        $this->alternativeInputs[$index] = [
+            'alternative' => "{$report->facility_name} - {$report->report_ID}",
+            'report_id' => $report->report_ID,
+        ];
+
+        $this->reportSearch[$index] = "{$report->facility_name} - {$report->report_ID}";
+    }
+
+    $this->numberOfInputs = count($this->alternativeInputs);
+}
+
 
 
     public function render()

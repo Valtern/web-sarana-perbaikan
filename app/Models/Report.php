@@ -59,10 +59,4 @@ protected static function booted()
     });
 }
 
-
-    // Kalau kamu hanya ingin satu repair per report:
-    // public function repair()
-    // {
-    //     return $this->hasOne(Repair::class, 'facility_report_id', 'report_ID');
-    // }
 }

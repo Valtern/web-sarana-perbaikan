@@ -12,12 +12,22 @@ class TOPSISCalculation extends Component
 {
     public $steps = [];
     public $calculated = false;
+    public $showOnlyFinal = false;
+    public $showStepsOnly = false;
+
 
     public function runTOPSIS()
     {
         // Step 1: Retrieve data
         $criteria = CriteriaTopsis::all();
         $alternatives = AlternativeTopsis::with('samples')->get();
+
+            // Check if there's no data
+    if ($criteria->isEmpty() || $alternatives->isEmpty() || $alternatives->every(fn($alt) => $alt->samples->isEmpty())) {
+        session()->flash('error', 'TOPSIS cannot be calculated: No data available in criteria, alternatives, or sample matrix.');
+        return;
+    }
+
 
         // Initialize structures
         $decisionMatrix = [];
@@ -162,8 +172,18 @@ $this->steps['result'] = $rankings;
         $this->calculated = true;
     }
 
-    public function render()
-    {
-        return view('livewire.admin.topsis-calculation');
+public function render()
+{
+    return view('livewire.admin.topsis-calculation', [
+        'finalOnly' => $this->showOnlyFinal,
+        'stepsOnly' => $this->showStepsOnly,
+    ]);
+}
+public function mount()
+{
+    if ($this->showStepsOnly && !$this->calculated) {
+        $this->runTOPSIS();
     }
+}
+
 }
