@@ -16,7 +16,7 @@ class Repair extends Model
     protected $fillable = [
         'facility_report_id',
         'technician_id',
-        'priority_Assignment', // ✅ Add this line
+        'priority_Assignment',
         'repair_status',
         'notes',
     ];

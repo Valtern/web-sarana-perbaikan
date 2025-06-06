@@ -17,7 +17,7 @@
           Fill in the form
         </h2>
 
-@livewire('lecturer.submit-report')
+        @livewire('lecturer.submit-report')
 
 
 
@@ -57,18 +57,9 @@
           </div>
         </div>
         <!-- End Icon Block -->
-
-
-
       </div>
     </div>
   </div>
-    <div class="text-center mt-15">
-      <h1 class="text-3xl font-bold text-gray-800 sm:text-4xl dark:text-white">
-        Your report history
-      </h1>
-    </div>
-
 </div>
          <!-- Table -->
          @livewire('lecturer.report-history')

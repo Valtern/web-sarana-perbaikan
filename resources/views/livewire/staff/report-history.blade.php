@@ -40,6 +40,11 @@
                   </th>
                   <th class="px-6 py-3 text-start">
                     <div class="flex items-center gap-x-2">
+                      <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Weight</span>
+                    </div>
+                  </th>
+                  <th class="px-6 py-3 text-start">
+                    <div class="flex items-center gap-x-2">
                       <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">Created</span>
                     </div>
                   </th>
@@ -69,19 +74,19 @@
                   </td>
                   <td class="px-6 py-3 text-sm text-gray-600 dark:text-neutral-400">{{ $report->facility_name }}</td>
                   <td class="px-6 py-3 text-sm text-gray-600 dark:text-neutral-400">{{ $report->description }}</td>
-                  <td class="px-6 py-3 text-sm text-gray-600 dark:text-neutral-400">{{ $report->created_at->format('d M, H:i') }}</td>
-                  <td class="px-6 py-3">
-                    @if($report->picture_proof)
-                    <button
-                      type="button"
-                      onclick="openModal(@js(url($report->picture_proof)))"
-                      class="py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
-                      View Proof
-                    </button>
-                    @else
-                    <span class="text-xs text-gray-400 italic">No image</span>
-                    @endif
+                  <td class="px-6 py-3 text-sm text-gray-600 dark:text-neutral-400">
+                    {{ is_array($report->weight) ? implode(', ', $report->weight) : 'N/A' }}
                   </td>
+                  <td class="px-6 py-3 text-sm text-gray-600 dark:text-neutral-400">{{ $report->created_at->format('d M, H:i') }}</td>
+                   <td class="px-6 py-3 text-sm text-gray-600 dark:text-neutral-400">
+                    @if ($report->picture_proof)
+                        <a href="{{ Storage::url($report->picture_proof) }}" target="_blank">
+                            <img src="{{ Storage::url($report->picture_proof) }}" alt="Proof" class="w-16 h-16 object-cover rounded-md border">
+                        </a>
+                    @else
+                        <span class="italic text-gray-400">No proof</span>
+                    @endif
+                </td>
                   <td class="px-6 py-3 text-sm text-gray-600 dark:text-neutral-400">
                     {{ $report->status }}
                   </td>
@@ -89,27 +94,6 @@
                 @endforeach
               </tbody>
             </table>
-
-            <!-- Modal -->
-            <div id="imageModal" class="fixed hidden inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-              <div class="relative">
-                <button onclick="closeModal()" class="absolute top-0 right-0 m-4 text-white text-2xl">&times;</button>
-                <img id="modalImage" class="max-w-full max-h-[90vh] rounded-lg" src="" alt="Proof Image">
-              </div>
-            </div>
-
-            <script>
-              function openModal(imageUrl) {
-                document.getElementById('modalImage').src = imageUrl;
-                document.getElementById('imageModal').classList.remove('hidden');
-              }
-
-              function closeModal() {
-                document.getElementById('modalImage').src = '';
-                document.getElementById('imageModal').classList.add('hidden');
-              }
-            </script>
-
           </div>
         </div>
       </div>
