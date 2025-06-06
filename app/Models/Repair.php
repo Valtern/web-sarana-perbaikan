@@ -48,4 +48,9 @@ class Repair extends Model
     {
         return $this->belongsTo(User::class, 'technician_id');
     }
+    public function feedback()
+{
+    return $this->hasOne(\App\Models\Feedback::class, 'repairs_ID', 'repair_ID');
+}
+
 }

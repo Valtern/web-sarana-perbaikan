@@ -10,6 +10,9 @@ class ManageAssignmentStatus extends Component
 {
     public $repairs;
     public $repairCount = 0;
+    public $showCannotDeleteModal = false;
+    public $cannotDeleteMessage = '';
+
 
 
     public function mount()
@@ -35,18 +38,20 @@ class ManageAssignmentStatus extends Component
         $repair->update(['repair_status' => 'In_progress']);
         $this->loadRepairs();
     }
-
 public function decline(int $repairId): void
 {
-    $repair = Repair::with('report')->findOrFail($repairId);
+    $repair = Repair::with(['report', 'feedback'])->findOrFail($repairId);
 
+    // If there is feedback related to this repair, do not delete
+    if ($repair->feedback()->exists()) {
+        $this->cannotDeleteMessage = '❌ Cannot delete data because feedback already exists.';
+        $this->showCannotDeleteModal = true;
+        return;
+    }
 
+    // Otherwise, update status and delete
     $repair->report->update(['status' => 'Declined']);
-
-
     $repair->delete();
-
-
     $this->loadRepairs();
 }
 

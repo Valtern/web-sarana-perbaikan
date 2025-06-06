@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Livewire\Technician;
+namespace App\Livewire\Lecturer;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class TechnicianDashboard extends Component
+class LecturerDashboard extends Component
 {
     public $user;
 
@@ -16,6 +16,6 @@ class TechnicianDashboard extends Component
 
     public function render()
     {
-        return view('livewire.technician.technician-dashboard');
+        return view('livewire.lecturer.lecturer-dashboard');
     }
 }

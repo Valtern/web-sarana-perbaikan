@@ -1,41 +1,53 @@
-<div><div><!-- Hero -->
+<div><!-- Hero -->
 <div class="relative overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('https://preline.co/assets/svg/examples/polygon-bg-element.svg')] dark:before:bg-[url('https://preline.co/assets/svg/examples-dark/polygon-bg-element.svg')] before:bg-no-repeat before:bg-top before:bg-cover before:size-full before:-z-1 before:transform before:-translate-x-1/2">
-  <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
-    <!-- Announcement Banner -->
-    <div class="flex justify-center">
-      
-    </div>
-    <!-- End Announcement Banner -->
+  <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
 
-    <!-- Title -->
-    <div class="mt-5 max-w-2xl text-center mx-auto">
-      <h1 class="block font-bold text-gray-800 text-4xl md:text-5xl lg:text-6xl dark:text-neutral-200">
-        Welcome
-        <span class="bg-clip-text bg-linear-to-tl from-blue-600 to-violet-600 text-transparent">Staffs !</span>
+    <!-- Welcome Section -->
+    <div class="text-center">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-800 dark:text-white">
+        Welcome, {{ $user->name }}
       </h1>
-    </div>
-    <!-- End Title -->
-
-    <div class="mt-5 max-w-3xl text-center mx-auto">
-      <p class="text-lg text-gray-600 dark:text-neutral-400">Preline UI is an open-source set of prebuilt UI components, ready-to-use examples and Figma design system based on the utility-first Tailwind CSS framework.</p>
-    </div>
-
-    <!-- Buttons -->
-    <div class="mt-8 gap-3 flex justify-center">
-      <a class="inline-flex justify-center items-center gap-x-3 text-center bg-linear-to-tl from-blue-600 to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-hidden focus:from-violet-600 focus:to-blue-600 py-3 px-4" href="#">
-        Get started
-        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-      </a>
-      <button type="button" class="relative group p-2 ps-3 inline-flex items-center gap-x-2 text-sm font-mono rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
-        $ npm i preline
-        <span class="flex justify-center items-center bg-gray-200 rounded-md size-7 dark:bg-neutral-700 dark:text-neutral-400">
-          <svg class="shrink-0 size-4 group-hover:rotate-6 transition" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
-        </span>
-      </button>
-    </div>
-    <!-- End Buttons -->
+      <div class="max-w-4xl mx-auto mt-16">
+<div class="bg-white dark:bg-neutral-800 shadow-md rounded-lg p-8 text-center">
+  <div class="flex justify-center">
+    <img src="{{ $user->profile_picture_url }}" alt="Profile Picture"
+         class="w-32 h-32 rounded-full object-cover border-4 border-blue-500 shadow-lg">
+  </div>
+  <div class="mt-4">
+    <h3 class="text-2xl font-semibold text-gray-800 dark:text-white">{{ $user->name }}</h3>
+    <p class="text-sm text-gray-600 dark:text-gray-300">{{ $user->email }}</p>
+    <p class="mt-1 text-base text-blue-600 dark:text-blue-400 font-medium capitalize">
+      Role: {{ $user->role }}
+    </p>
   </div>
 </div>
+
+</div>
+
+      <p class="mt-3 text-lg text-gray-600 dark:text-gray-400">
+        You are logged in as <span class="font-semibold capitalize text-blue-600">{{ $user->role }}</span>
+      </p>
+    </div>
+
+    <!-- Description of System -->
+    <div class="mt-10 max-w-3xl text-center mx-auto">
+      <p class="text-gray-700 dark:text-gray-300 text-lg">
+        This platform is designed to assist students/lecturer/staff  in reporting facility issues and receiving optimal repair solutions through a smart recommendation system.
+        Your reports are processed and prioritized using the TOPSIS decision-making method to ensure efficient maintenance and repair operations across the campus.
+      </p>
+    </div>
+
+    <!-- Action Button -->
+    <div class="mt-8 flex justify-center">
+      <a href="{{ route('staff.report') }}" class="inline-flex items-center gap-x-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-3 px-5 rounded-md transition">
+        Create New Report
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+      </a>
+    </div>
+
+  </div>
+</div>
+
 <div><!-- Icon Blocks -->
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
   <div class="max-w-4xl mx-auto">
@@ -135,4 +147,4 @@
   </div>
 </div>
 <!-- End Icon Blocks --></div>
-<!-- End Hero --></div></div>
+<!-- End Hero --></div>

@@ -28,7 +28,8 @@ use App\Livewire\Lecturer\{
     LecturerReport,
     LecturerBuildingList,
     LecturerFacilityList,
-    LecturerFeedbackList
+    LecturerFeedbackList,
+    LecturerDashboard
 };
 
 // Student
@@ -70,7 +71,8 @@ Route::get('/', function () {
 
 // Lecturer Routes
 Route::middleware(['auth', 'verified', 'role:lecturer'])->group(function () {
-    Route::view('/dashboard', 'dashboard')->name('lecturer.dashboard');
+        Route::view('/dashboard', 'dashboard')->name('lecturer.dashboard');
+    Route::get('/lecturer/dashboard', LecturerDashboard::class)->name('lecturer.dashboard');
     Route::get('/lecturer/report', LecturerReport::class)->name('lecturer.report');
     Route::get('/lecturer/building', LecturerBuildingList::class)->name('lecturer.building.list');
     Route::get('/lecturer/facility', LecturerFacilityList::class)->name('lecturer.facility.list');

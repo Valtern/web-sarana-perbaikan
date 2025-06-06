@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -20,6 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'profile_picture',
         'password',
         'role',
     ];
@@ -28,6 +30,23 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+protected function profilePictureUrl(): Attribute
+{
+    return Attribute::get(function () {
+        if (!$this->profile_picture) {
+            return asset('images/default-pfp.png');
+        }
+
+        // If it's already a full URL
+        if (Str::startsWith($this->profile_picture, ['http://', 'https://'])) {
+            return $this->profile_picture;
+        }
+
+        return asset('storage/' . $this->profile_picture);
+    });
+}
+
 
     protected function casts(): array
     {
