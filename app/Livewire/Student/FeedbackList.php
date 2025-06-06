@@ -31,16 +31,19 @@ class FeedbackList extends Component
             'rate' => $this->rate,
         ]);
 
-        Toaster::success('Feedback Sended !'); 
+        Toaster::success('Feedback Sended !');
         $this->reset(['repairs_ID', 'feedback_content', 'rate']);
     }
+public function render()
+{
+    $userId = Auth::id();
 
-        public function render()
-    {
-        $repairOptions = Repair::select('repair_ID')->get(); // atau tambah kolom lain jika ingin ditampilkan lebih jelas
+    $repairOptions = Repair::whereHas('report', function ($query) use ($userId) {
+        $query->where('user_ID', $userId);
+    })->select('repair_ID')->get();
 
-        return view('livewire.student.menu.student-feedback-list', [
-            'repairOptions' => $repairOptions,
-        ]);
-    }
+    return view('livewire.student.menu.student-feedback-list', [
+        'repairOptions' => $repairOptions,
+    ]);
+}
 }

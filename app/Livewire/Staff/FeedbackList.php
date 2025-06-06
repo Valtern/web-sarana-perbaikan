@@ -35,12 +35,17 @@ class FeedbackList extends Component
         $this->reset(['repairs_ID', 'feedback_content', 'rate']);
     }
 
-        public function render()
-    {
-        $repairOptions = Repair::select('repair_ID')->get(); // atau tambah kolom lain jika ingin ditampilkan lebih jelas
+public function render()
+{
+    $userId = Auth::id();
 
-        return view('livewire.staff.menu.staff-feedback-list', [
-            'repairOptions' => $repairOptions,
-        ]);
-    }
+    $repairOptions = Repair::whereHas('report', function ($query) use ($userId) {
+        $query->where('user_ID', $userId);
+    })->select('repair_ID')->get();
+
+    return view('livewire.staff.menu.staff-feedback-list', [
+        'repairOptions' => $repairOptions,
+    ]);
+}
+
 }
