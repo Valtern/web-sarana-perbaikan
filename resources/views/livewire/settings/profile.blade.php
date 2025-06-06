@@ -1,14 +1,38 @@
+{{-- {{dd($profile_picture)}} --}}
 <section class="w-full">
     @include('partials.settings-heading')
 
-    <x-settings.layout :heading="__('Profile')" :subheading="__('Update your name and email address')">
+    <x-settings.layout :heading="__('Profile')" :subheading="__('Update your profile data')">
         <form wire:submit="updateProfileInformation" class="my-6 w-full space-y-6">
             <flux:input wire:model="name" :label="__('Name')" type="text" required autofocus autocomplete="name" />
+            <div class="space-y-4">
+                <!-- Foto Profil -->
+                <div class="flex items-center gap-4">
+                    @if ($profile_picture)
+                        <img src="{{ $profile_picture }}" alt="Profile Photo"
+                            class="size-20 rounded-full object-cover ring-2 ring-black-400 dark:ring-black-600">
+                    @endif
+                    
+                </div>
+                <div class="space-y-2">
+                        <input type="file" wire:model="photo" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
+                       file:rounded-full file:border-0 file:text-sm file:font-semibold
+                       file:bg-blue-50 file:text-bl-700 hover:file:bg-blue-100" />
+
+                        @error('photo') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+
+                        @if ($profile_picture)
+                            <flux:button wire:click="deleteProfilePhoto" type="button" variant="danger">
+                                {{ __('Delete Photo') }}
+                            </flux:button>
+                        @endif
+                    </div>
+            </div>
 
             <div>
                 <flux:input wire:model="email" :label="__('Email')" type="email" required autocomplete="email" />
 
-                @if (auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail &&! auth()->user()->hasVerifiedEmail())
+                @if (auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !auth()->user()->hasVerifiedEmail())
                     <div>
                         <flux:text class="mt-4">
                             {{ __('Your email address is unverified.') }}
