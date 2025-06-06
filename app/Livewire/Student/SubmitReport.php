@@ -38,7 +38,7 @@ public function submit()
         Toaster::info("Ukuran gambar: {$sizeInKB} KB");
 
         $filename = time() . '_' . Str::slug($this->picture_proof->getClientOriginalName());
-        $imagePath = $this->picture_proof->storeAs('public/photos', $filename);
+        $imagePath = $this->picture_proof->storeAs('proof', $filename, 'public');
     }
 
     Report::create([

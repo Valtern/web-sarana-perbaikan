@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('report_ID');
             $table->unsignedBigInteger('user_ID');
             $table->json('weight')->nullable();
+            $table->enum('priority_Assignment', ['Very High', 'High', 'Medium', 'Low'])->nullable();
             $table->string('facility_name', 50);
             $table->string('location', 200)->nullable();
             $table->string('description', 200)->nullable();
