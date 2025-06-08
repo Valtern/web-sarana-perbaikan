@@ -52,5 +52,11 @@ class Repair extends Model
 {
     return $this->hasOne(\App\Models\Feedback::class, 'repairs_ID', 'repair_ID');
 }
-
+    protected static function booted()
+    {
+        static::deleting(function ($repair) {
+            // This will delete associated feedback before the repair is deleted.
+            $repair->feedback()->delete();
+        });
+    }
 }

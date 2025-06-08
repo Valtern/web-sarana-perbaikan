@@ -52,11 +52,15 @@ class Report extends Model
 
 }
 
-protected static function booted()
-{
-    static::deleting(function ($report) {
-        $report->repairs()->delete(); // hapus dulu repairs yang terkait
-    });
-}
+    protected static function booted()
+    {
+        static::deleting(function ($report) {
+            // Deleting each repair individually triggers their model events (for deleting feedback)
+            $report->repairs()->each(function($repair) {
+                $repair->delete();
+            });
+            $report->alternatives()->delete();
+        });
+    }
 
 }

@@ -4,8 +4,6 @@ namespace App\Livewire\Admin;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\ReportSummaryExport;
 use App\Models\Report;
 
 class ReportManagement extends Component
@@ -15,26 +13,46 @@ class ReportManagement extends Component
     public $endDate;
     public $reports;
     public $statusUpdates = [];
-    public $summary = [];
     public $categoryScores = [];
     public $mostDamagedCategory;
     public $leastDamagedCategory;
     public $selectedReport;
 
+    // We no longer need $showDeleteModal
+    // public $showDeleteModal = false;
+    public $reportIdToDelete;
+    public $deleteMessage;
+
     public function mount()
     {
-        $this->summary = $this->generateSummary();
+        $this->loadReports();
+
         $this->categoryScores = DB::table('report')
             ->select('category', DB::raw('COUNT(*) as score'))
             ->groupBy('category')
             ->pluck('score', 'category')
             ->toArray();
 
-        $this->mostDamagedCategory = collect($this->categoryScores)->sortDesc()->keys()->first();
-        $this->leastDamagedCategory = collect($this->categoryScores)->sort()->keys()->first();
+        $this->mostDamagedCategory = collect($this->categoryScores)->sortDesc()->keys()->first() ?? 'N/A';
+        $this->leastDamagedCategory = collect($this->categoryScores)->sort()->keys()->first() ?? 'N/A';
     }
 
-    public function render()
+    public function updatedSearchTerm()
+    {
+        $this->loadReports();
+    }
+
+    public function updatedStartDate()
+    {
+        $this->loadReports();
+    }
+
+    public function updatedEndDate()
+    {
+        $this->loadReports();
+    }
+
+    public function loadReports()
     {
         $query = DB::table('report')
             ->join('users', 'report.user_ID', '=', 'users.id')
@@ -53,19 +71,12 @@ class ReportManagement extends Component
         foreach ($this->reports as $report) {
             $this->statusUpdates[$report->report_ID] = $report->status;
         }
+    }
 
-        $this->summary = $this->generateSummary();
-        $this->categoryScores = DB::table('report')
-            ->select('category', DB::raw('COUNT(*) as score'))
-            ->groupBy('category')
-            ->pluck('score', 'category')
-            ->toArray();
-
-        $this->leastDamagedCategory = collect($this->categoryScores)->sort()->keys()->first() ?? 'N/A';
-
+    public function render()
+    {
         return view('livewire.admin.Menu.report.report-management', [
             'reports' => $this->reports,
-            'summary' => $this->summary,
             'categoryScores' => $this->categoryScores,
             'leastDamagedCategory' => $this->leastDamagedCategory
         ]);
@@ -78,88 +89,48 @@ class ReportManagement extends Component
 
     public function updateStatusWithValue($reportId, $status)
     {
-        $this->statusUpdates[$reportId] = $status;
-        if (isset($this->statusUpdates[$reportId])) {
-            DB::table('report')
-                ->where('report_ID', $reportId)
-                ->update(['status' => $this->statusUpdates[$reportId]]);
-            session()->flash('message', "Status updated successfully for report ID: $reportId");
+        $currentStatus = DB::table('report')->where('report_ID', $reportId)->value('status');
+        if ($currentStatus !== $status) {
+            DB::table('report')->where('report_ID', $reportId)->update(['status' => $status]);
+            session()->flash('message', "Status updated for report ID: $reportId");
         }
     }
 
-    public function deleteReport($reportId)
+    public function confirmDelete($reportId)
     {
-        DB::table('report')->where('report_ID', $reportId)->delete();
-    }
+        $this->reportIdToDelete = $reportId;
+        $report = Report::find($reportId);
 
-    public function generateSummary(): array
-    {
-        $totalReports = DB::table('report')->count();
-        $incomingReports = DB::table('report')
-            ->whereDate('created_at', today())
-            ->count();
-        $mostFrequentReporter = DB::table('report')
-            ->join('users', 'report.user_ID', '=', 'users.id')
-            ->select('users.name', DB::raw('COUNT(*) as count'))
-            ->groupBy('users.name')
-            ->orderByDesc('count')
-            ->first();
-        $mostDamagedCategory = DB::table('report')
-            ->select('category', DB::raw('COUNT(*) as count'))
-            ->groupBy('category')
-            ->orderByDesc('count')
-            ->first();
+        $hasFeedback = $report->repairs()->whereHas('feedback')->exists();
 
-        return [
-            'total_reports' => $totalReports,
-            'incoming_reports' => $incomingReports,
-            'most_frequent_reporter' => $mostFrequentReporter,
-            'most_damaged_category' => $mostDamagedCategory,
-        ];
-    }
-
-    public function exportSummary()
-    {
-        $summaryData = [
-            ['Metric', 'Value'],
-            ['Total Reports', $this->summary['total_reports']],
-            ['Incoming Today', $this->summary['incoming_reports']],
-            ['Most Frequent Reporter', $this->summary['most_frequent_reporter']->name ?? 'N/A'],
-            ['Most Damaged Category', $this->summary['most_damaged_category']->category ?? 'N/A'],
-            ['Least Damaged Category', $this->leastDamagedCategory],
-        ];
-
-        $damageScores = collect($this->categoryScores)->sortDesc()->map(function ($score, $category) {
-            return [$category, $score];
-        })->values()->toArray();
-    }
-
-    public function loadDamageSummary()
-    {
-        $priorityWeights = [
-            'Very High' => 4,
-            'High' => 3,
-            'Medium' => 2,
-            'Low' => 1,
-        ];
-
-        $reports = Report::all();
-        $scores = [];
-
-        foreach ($reports as $report) {
-            $category = $report->category;
-            $priority = $report->priority_Assignment;
-            $weight = $priorityWeights[$priority] ?? 0;
-            if (!isset($scores[$category])) {
-                $scores[$category] = 0;
-            }
-            $scores[$category] += $weight;
+        if ($hasFeedback) {
+            $this->deleteMessage = 'This report has associated feedback. Deleting the report will also delete all related repairs and feedback. Are you sure?';
+        } else {
+            $this->deleteMessage = 'Are you sure you want to delete this report?';
         }
 
-        $this->categoryScores = $scores;
-        arsort($scores);
-        $this->mostDamagedCategory = array_key_first($scores);
-        asort($scores);
-        $this->leastDamagedCategory = array_key_first($scores);
+        // We no longer need to manually manage the modal's visibility
+        // $this->showDeleteModal = true;
+    }
+
+ public function destroyReport()
+{
+    $report = Report::find($this->reportIdToDelete);
+    if ($report) {
+        $report->delete();
+        session()->flash('message', 'Report deleted successfully.');
+    }
+
+    // This line is correct. It sends an event to the browser.
+    $this->dispatch('close-delete-modal');
+
+    // This line is correct. It refreshes the data.
+    $this->loadReports();
+}
+
+    public function cancelDelete()
+    {
+        // Simply reset the ID to delete. The modal is closed by Preline's data attributes.
+        $this->reportIdToDelete = null;
     }
 }

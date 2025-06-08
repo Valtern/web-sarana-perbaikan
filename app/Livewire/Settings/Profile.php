@@ -24,51 +24,52 @@ class Profile extends Component
     public function mount(): void
     {
         $this->user = Auth::user();
-        
+
         $this->name = $this->user->name;
         $this->email = $this->user->email;
-        $this->profile_picture = $this->user->profile_picture 
+        $this->profile_picture = $this->user->profile_picture
             ? Storage::url($this->user->profile_picture)
             : "https://pn-solok.go.id/images/pas_photo/blank-profile-picture.png";
     }
 
-    public function deleteProfilePhoto()
-    {
-        if ($this->user->profile_picture) {
-            $user = Auth::user();
-            Storage::disk('public')->delete($this->user->profile_picture);
-            $user->profile_picture = null;
-            $user->save();
-            // $user->update(['profile_picture' => 'https://pn-solok.go.id/images/pas_photo/blank-profile-picture.png']);
+public function deleteProfilePhoto()
+{
+    if ($this->user->profile_picture) {
+        Storage::disk('public')->delete($this->user->profile_picture);
+        $this->user->profile_picture = null;
+        $this->user->save();
 
-            $this->profile_picture = "https://pn-solok.go.id/images/pas_photo/blank-profile-picture.png";
-        }
+        // Also reset photo preview and Livewire state
+        $this->profile_picture = "https://pn-solok.go.id/images/pas_photo/blank-profile-picture.png";
+        $this->photo = null; // Clear file input if needed
+    }
+}
+
+
+public function updateProfileInformation()
+{
+    $this->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255|unique:users,email,' . auth()->id(),
+        'photo' => 'nullable|image|max:2048',
+    ]);
+
+    $user = $this->user; // use the Livewire state-stored version
+
+    if ($this->photo) {
+        $photoPath = $this->photo->store('profile-photos', 'public');
+        $user->profile_picture = $photoPath;
+        $this->profile_picture = Storage::url($photoPath);
     }
 
-    public function updateProfileInformation()
-    {
-        $this->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email,' . auth()->id(),
-            'photo' => 'nullable|image|max:2048', // max 2MB
-        ]);
+    $user->name = $this->name;
+    $user->email = $this->email;
+    $user->save();
 
-        $user = Auth::user();
+    $this->dispatch('profile-updated');
+    session()->flash('status', 'Profile updated!');
+}
 
-        if ($this->photo) {
-            $photoPath = $this->photo->store('profile-photos', 'public');
-            $user->profile_picture = $photoPath;
-        }
-
-        $user->name = $this->name;
-        $user->email = $this->email;
-        $this->profile_picture = $photoPath;
-        $user->save();
-        
-
-        $this->dispatch('profile-updated');
-        session()->flash('status', 'Profile updated!');
-    }
 
     public function resendVerificationNotification(): void
     {

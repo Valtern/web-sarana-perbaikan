@@ -10,11 +10,14 @@
           <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
             <div>
               <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                API Keys
+                Building list
               </h2>
-              <p class="text-sm text-gray-600 dark:text-neutral-400">
-                Keys you have generated to connect with third-party clients or access the <a class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500" href="#">Preline API.</a>
-              </p>
+                <p class="text-sm text-gray-600 dark:text-neutral-400">
+                 See all buildings in your system. Track status and location of
+                  <a class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500" href="#">
+                    equipment and resources.
+                  </a>
+                </p>
             </div>
 
           </div>
@@ -79,7 +82,7 @@
                       </span>
                     </div>
                   </td>
-              
+
                 </tr>
                 @endforeach
               </tbody>
