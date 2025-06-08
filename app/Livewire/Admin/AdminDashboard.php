@@ -10,6 +10,7 @@ use App\Models\Building;
 use App\Models\Facility;
 use App\Models\Feedback;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class AdminDashboard extends Component
 {
@@ -22,6 +23,7 @@ class AdminDashboard extends Component
     public $ratingAvg;
     public $categories;
     public $feedbackCount;
+    public $user;
 
     public function mount()
     {
@@ -34,6 +36,8 @@ class AdminDashboard extends Component
         )
         ->groupBy('report.category')
         ->get();
+
+        $this->user = Auth::user();
 
         $this->categories = $data->pluck('category');
         $this->ratingAvg = $data->pluck('avg_rating');

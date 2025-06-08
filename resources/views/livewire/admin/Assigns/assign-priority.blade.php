@@ -18,10 +18,19 @@
 
       <!-- Number of Inputs -->
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-white">Number of {{ ucfirst($mode) }} to Add:</label>
-        <input type="number" min="1" wire:model="numberOfInputs" class="mt-1 block w-full rounded-md border-gray-300  focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400" />
-        <button type="button" wire:click="updateFieldCount" class="mt-2 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm">Generate Fields</button>
+        <label class="block text-sm font-medium text-gray-700 dark:text-white">
+          Number of {{ ucfirst($mode) }} to Add:
+        </label>
+
+        <input type="number" min="1" wire:model="numberOfInputs"
+              class="mt-1 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400" />
+
+        <button type="button" wire:click="updateFieldCount"
+                class="mt-4 py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+          Generate Fields
+        </button>
       </div>
+
 
       <!-- Dynamic Inputs -->
       <div class="space-y-4">
@@ -75,7 +84,7 @@
 
 <!-- Submit & Clear Buttons -->
 <div class="flex justify-between space-x-2">
-  <button type="submit" class="py-2 px-3 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
+  <button type="submit" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-100 text-teal-800 hover:bg-teal-200 focus:outline-hidden focus:bg-teal-200 disabled:opacity-50 disabled:pointer-events-none dark:text-teal-500 dark:bg-teal-800/30 dark:hover:bg-teal-800/20 dark:focus:bg-teal-800/20">
     Submit
   </button>
 @if ($mode === 'alternative')
@@ -86,7 +95,7 @@
   </button>
 @endif
 
-  <button type="button" wire:click="clearAll" class="py-2 px-3 bg-red-600 text-white rounded hover:bg-red-700 text-sm">
+  <button type="button" wire:click="clearAll" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-100 text-red-800 hover:bg-red-200 focus:outline-hidden focus:bg-red-200 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:bg-red-800/30 dark:hover:bg-red-800/20 dark:focus:bg-red-800/20">
     Clear
   </button>
 </div>
@@ -149,7 +158,7 @@
 <div class="mt-4 text-center">
   <button
     type="button"
-    class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700"
+    class="mt-4 py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
     aria-haspopup="dialog"
     aria-expanded="false"
     aria-controls="hs-scale-animation-modal"

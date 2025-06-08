@@ -3,7 +3,8 @@
 <head>
     @include('partials.head')
 </head>
-<body class="min-h-screen bg-white dark:bg-zinc-800">
+<body class="min-h-screen bg-gray-100 dark:bg-zinc-800">
+
 
     @php
         $role = auth()->user()->role;
@@ -17,7 +18,7 @@
         };
     @endphp
 
-    <flux:sidebar sticky stashable class="border-r border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
+    <flux:sidebar sticky stashable class="border-r border-zinc-200 bg-white dark:border-zinc-700 dark:bg-zinc-900">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
         <a href="{{ route($dashboardRoute) }}" class="mr-5 flex items-center space-x-2" wire:navigate>
@@ -380,7 +381,7 @@
   <!-- Grid -->
   <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-5">
     <div>
-      <a class="flex-none text-xl font-semibold text-black focus:outline-hidden dark:text-white" href="#" aria-label="Brand">Brand</a>
+      <a class="flex-none text-xl font-semibold text-black focus:outline-hidden dark:text-white" href="#" aria-label="Brand">IRIS</a>
     </div>
     <!-- End Col -->
 

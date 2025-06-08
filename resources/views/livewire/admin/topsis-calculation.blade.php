@@ -3,7 +3,7 @@
     @if (!$calculated && !$stepsOnly)
         <button
             wire:click="runTOPSIS"
-            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition text-sm"
+           class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-yellow-100 text-yellow-800 hover:bg-yellow-200 focus:outline-hidden focus:bg-yellow-200 disabled:opacity-50 disabled:pointer-events-none dark:text-yellow-500 dark:bg-yellow-800/30 dark:hover:bg-yellow-800/20 dark:focus:bg-yellow-800/20"
         >
             Calculate TOPSIS
         </button>

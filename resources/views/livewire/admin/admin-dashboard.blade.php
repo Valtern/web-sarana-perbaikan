@@ -1,131 +1,123 @@
 <div><!-- Card Section -->
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <!-- Grid -->
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-
-            <!-- Total Buildings Card -->
-            <div
-                class="flex flex-col gap-y-3 lg:gap-y-5 p-4 md:p-5 bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
-                <div class="inline-flex justify-center items-center">
-                    <span class="size-2 inline-block bg-red-500 rounded-full me-2"></span>
-                    <span class="text-xs font-semibold uppercase text-gray-600 dark:text-neutral-400">Total
-                        Buildings</span>
-                </div>
-
-                <div class="text-center">
-                    <h3 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-800 dark:text-neutral-200">
-                        {{ $totalBuildings }}
-                    </h3>
-                </div>
-            </div>
-            <!-- End Card -->
+  <!-- Hero Welcome Section -->
+  <div class="p-6 shadow bg-blue-600 bg-[url('https://preline.co/assets/svg/examples/abstract-1.svg')] bg-no-repeat bg-cover  rounded-3xl  bg-left-top text-left mb-10">
 
 
-            <!-- Total Reports Card -->
-            <div
-                class="flex flex-col gap-y-3 lg:gap-y-5 p-4 md:p-5 bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
-                <div class="inline-flex justify-center items-center">
-                    <span class="size-2 inline-block bg-green-500 rounded-full me-2"></span>
-                    <span class="text-xs font-semibold uppercase text-gray-600 dark:text-neutral-400">Total
-                        Report</span>
-                </div>
-
-                <div class="text-center">
-                    <h3 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-800 dark:text-neutral-200">
-                        {{ $totalReports }}
-                    </h3>
-                </div>
-            </div>
-            <!-- End Card -->
-
-            <!-- Total Users Card -->
-            <div
-                class="flex flex-col gap-y-3 lg:gap-y-5 p-4 md:p-5 bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
-                <div class="inline-flex justify-center items-center">
-                    <span class="size-2 inline-block bg-orange-500 rounded-full me-2"></span>
-                    <span class="text-xs font-semibold uppercase text-gray-600 dark:text-neutral-400">Total User</span>
-                </div>
-
-                <div class="text-center">
-                    <h3 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-800 dark:text-neutral-200">
-                        {{ $totalUsers }}
-                    </h3>
-                </div>
-            </div>
-            <!-- End Card -->
-
-            <!-- Total Facilities Card -->
-            <div
-                class="flex flex-col gap-y-3 lg:gap-y-5 p-4 md:p-5 bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
-                <div class="inline-flex justify-center items-center">
-                    <span class="size-2 inline-block bg-blue-500 rounded-full me-2"></span>
-                    <span class="text-xs font-semibold uppercase text-gray-600 dark:text-neutral-400">Total
-                        Facilities</span>
-                </div>
-
-                <div class="text-center">
-                    <h3 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-800 dark:text-neutral-200">
-                        {{ $totalFacilities }}
-                    </h3>
-                </div>
-            </div>
-            <!-- End Card -->
-
-            <!-- Total Feedback Card -->
-            <div
-                class="flex flex-col gap-y-3 lg:gap-y-5 p-4 md:p-5 bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
-                <div class="inline-flex justify-center items-center">
-                    <span class="size-2 inline-block bg-purple-500 rounded-full me-2"></span>
-                    <span class="text-xs font-semibold uppercase text-gray-600 dark:text-neutral-400">Total
-                        Feedback</span>
-                </div>
-
-                <div class="text-center">
-                    <h3 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-800 dark:text-neutral-200">
-                        {{ $totalFeedbacks }}
-                    </h3>
-                </div>
-            </div>
-            <!-- End Card -->
-
-            <!-- Total Feedback Card -->
-            <div
-                class="flex flex-col gap-y-3 lg:gap-y-5 p-4 md:p-5 bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
-                <div class="inline-flex justify-center items-center">
-                    <span class="size-2 inline-block bg-pink-500 rounded-full me-2"></span>
-                    <span class="text-xs font-semibold uppercase text-gray-600 dark:text-neutral-400">Total
-                        Repair</span>
-                </div>
-
-                <div class="text-center">
-                    <h3 class="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-800 dark:text-neutral-200">
-                        {{ $totalRepairs }}
-                    </h3>
-                </div>
-            </div>
-        </div>        
+    <div class="flex flex-col lg:flex-row items-center gap-6 lg:gap-10 justify-between">
+      <div class="max-w-2xl">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white dark:text-white mb-6">
+        Welcome <span class="text-yellow-200">{{ $user->name }}</span>
+      </h1>
+        <p class="text-base text-white dark:text-gray-300">
+        Welcome, <span class="font-semibold text-yellow-200">{{ $user->name }}</span>! You are now logged in as an 
+        <span class="font-medium text-yellow-200 capitalize">{{ $user->role }}</span>. As an administrator, you have full access to manage users, monitor reports, and oversee system operations. 
+        All important notifications and updates will be sent to your registered email address at 
+        <a href="mailto:{{ $user->email }}" class="text-yellow-200 underline hover:no-underline">{{ $user->email }}</a>. 
+      </p>
+      </div>
+      <img src="{{ $user->profile_picture_url }}" alt="Profile Picture" class="w-48 h-60 rounded-lg object-cover shadow-lg">
     </div>
+  </div>
+
+  <!-- Statistic Cards Grid -->
+ <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    
+    <!-- Total Buildings Card -->
+    <div class="flex flex-col gap-y-6 p-7 bg-white border border-gray-200  rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
+      <div class="inline-flex items-center">
+        <span class="w-3 h-3 bg-red-500 rounded-full me-3"></span>
+        <span class="text-sm font-semibold uppercase text-gray-600 dark:text-neutral-400">Total Buildings</span>
+      </div>
+      <div class="text-center">
+        <h3 class="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-800 dark:text-neutral-200">
+          {{ $totalBuildings }}
+        </h3>
+      </div>
+    </div>
+
+    <!-- Total Reports Card -->
+    <div class="flex flex-col gap-y-6 p-7 bg-white border border-gray-200  rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
+      <div class="inline-flex items-center">
+        <span class="w-3 h-3 bg-green-500 rounded-full me-3"></span>
+        <span class="text-sm font-semibold uppercase text-gray-600 dark:text-neutral-400">Total Report</span>
+      </div>
+      <div class="text-center">
+        <h3 class="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-800 dark:text-neutral-200">
+          {{ $totalReports }}
+        </h3>
+      </div>
+    </div>
+
+    <!-- Total Users Card -->
+    <div class="flex flex-col gap-y-6 p-7 bg-white border border-gray-200  rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
+      <div class="inline-flex items-center">
+        <span class="w-3 h-3 bg-orange-500 rounded-full me-3"></span>
+        <span class="text-sm font-semibold uppercase text-gray-600 dark:text-neutral-400">Total User</span>
+      </div>
+      <div class="text-center">
+        <h3 class="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-800 dark:text-neutral-200">
+          {{ $totalUsers }}
+        </h3>
+      </div>
+    </div>
+
+    <!-- Total Facilities Card -->
+    <div class="flex flex-col gap-y-6 p-7 bg-white border border-gray-200  rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
+      <div class="inline-flex items-center">
+        <span class="w-3 h-3 bg-blue-500 rounded-full me-3"></span>
+        <span class="text-sm font-semibold uppercase text-gray-600 dark:text-neutral-400">Total Facilities</span>
+      </div>
+      <div class="text-center">
+        <h3 class="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-800 dark:text-neutral-200">
+          {{ $totalFacilities }}
+        </h3>
+      </div>
+    </div>
+
+    <!-- Total Feedback Card -->
+    <div class="flex flex-col gap-y-6 p-7 bg-white border border-gray-200  rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
+      <div class="inline-flex items-center">
+        <span class="w-3 h-3 bg-purple-500 rounded-full me-3"></span>
+        <span class="text-sm font-semibold uppercase text-gray-600 dark:text-neutral-400">Total Feedback</span>
+      </div>
+      <div class="text-center">
+        <h3 class="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-800 dark:text-neutral-200">
+          {{ $totalFeedbacks }}
+        </h3>
+      </div>
+    </div>
+
+    <!-- Total Repair Card -->
+    <div class="flex flex-col gap-y-6 p-7 bg-white border border-gray-200  rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
+      <div class="inline-flex items-center">
+        <span class="w-3 h-3 bg-pink-500 rounded-full me-3"></span>
+        <span class="text-sm font-semibold uppercase text-gray-600 dark:text-neutral-400">Total Repair</span>
+      </div>
+      <div class="text-center">
+        <h3 class="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-800 dark:text-neutral-200">
+          {{ $totalRepairs }}
+        </h3>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
     <!-- End Card Section -->
 
-   <!-- Legend Indicator -->
-<div class="flex justify-center sm:justify-end items-center gap-x-4 mb-3 sm:mb-6">
-    <div class="inline-flex items-center">
-        <span class="size-2.5 inline-block bg-green-500 rounded-sm me-2"></span>
-        <span class="text-[13px] text-gray-600 dark:text-neutral-400">
-            Feedback Avg
-        </span>
-    </div>
-    <div class="inline-flex items-center">
-        <span class="size-2.5 inline-block bg-blue-500 rounded-sm me-2"></span>
-        <span class="text-[13px] text-gray-600 dark:text-neutral-400">
-            Report Avg
-        </span>
-    </div>
+    <div class="p-4 md:p-6 w-[1300px] bg-white border border-gray-200  rounded-2xl dark:bg-neutral-900 dark:border-neutral-800 mx-auto">
+  <div class="mb-4">
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-white">Analytics Overview</h2>
+    <p class="text-sm text-gray-500 dark:text-gray-400">Grafik data aktivitas pengguna</p>
+  </div>
+
+  <!-- Chart Container -->
+  <div id="hs-multiple-area-charts" class="w-full h-64"></div>
 </div>
-<!-- End Legend Indicator -->
 
 
-    <div id="hs-multiple-area-charts"></div>
 </div>
 <!-- End Card --></div>
 </div>
@@ -137,7 +129,7 @@
     (function () {
       buildChart('#hs-multiple-area-charts', (mode) => ({
         chart: {
-          height: 300,
+          height: 400, // Lebih tinggi
           type: 'area',
           toolbar: { show: false },
           zoom: { enabled: false }
@@ -155,7 +147,7 @@
         legend: { show: true },
         dataLabels: { enabled: false },
         stroke: {
-          curve: 'straight',
+          curve: 'straight', // Lebih halus
           width: 2
         },
         grid: { strokeDashArray: 2 },
@@ -164,8 +156,9 @@
           gradient: {
             type: 'vertical',
             shadeIntensity: 1,
-            opacityFrom: 0.1,
-            opacityTo: 0.8
+            opacityFrom: 0.3,
+            opacityTo: 0.8,
+            stops: [0, 100]
           }
         },
         xaxis: {
@@ -185,9 +178,9 @@
           tooltip: { enabled: false },
           labels: {
             style: {
-              colors: '#9ca3af',
+              colors: 'blue',
               fontSize: '13px',
-              fontFamily: 'Inter, ui-sans-serif',
+              fontFamily: 'Arial, sans-serif',
               fontWeight: 400
             }
           }
@@ -196,9 +189,9 @@
           labels: {
             align: 'left',
             style: {
-              colors: '#9ca3af',
+              colors: '#3b82f6',
               fontSize: '13px',
-              fontFamily: 'Inter, ui-sans-serif',
+              fontFamily: 'Arial, sans-serif',
               fontWeight: 400
             },
             formatter: (value) => value.toFixed(1)
@@ -222,13 +215,13 @@
         responsive: [{
           breakpoint: 568,
           options: {
-            chart: { height: 300 },
+            chart: { height: 400 },
             xaxis: {
               labels: {
                 style: {
-                  colors: '#9ca3af',
+                  colors: '#3b82f6',
                   fontSize: '11px',
-                  fontFamily: 'Inter, ui-sans-serif',
+                  fontFamily: 'Arial, sans-serif',
                   fontWeight: 400
                 },
                 formatter: (title) => title.slice(0, 3)
@@ -238,9 +231,9 @@
               labels: {
                 align: 'left',
                 style: {
-                  colors: '#9ca3af',
+                  colors: '#3b82f6',
                   fontSize: '11px',
-                  fontFamily: 'Inter, ui-sans-serif',
+                  fontFamily: 'Arial, sans-serif',
                   fontWeight: 400
                 },
                 formatter: (value) => value.toFixed(1)
@@ -249,13 +242,13 @@
           }
         }]
       }), {
-        colors: ['#10b981', '#3b82f6'],
+        colors: ['#3b82f6', '#3b82f6'], // Biru dan Ungu
         fill: {
           gradient: {
-            shadeIntensity: 0.1,
+            shadeIntensity: 0.3,
             opacityFrom: 0.5,
             opacityTo: 0,
-            stops: [50, 100]
+            stops: [0, 100]
           }
         },
         xaxis: {
@@ -268,7 +261,7 @@
           borderColor: '#e5e7eb'
         }
       }, {
-        colors: ['#22c55e', '#2563eb'],
+        colors: ['#3b82f6', '#8b5cf6'], // Mode gelap juga biru-ungu
         xaxis: {
           labels: { style: { colors: '#a3a3a3' } }
         },
@@ -276,10 +269,11 @@
           labels: { style: { colors: '#a3a3a3' } }
         },
         grid: {
-          borderColor: '#404040'
+          borderColor: '#6366f1'
         }
       });
     })();
   });
 </script>
+
 

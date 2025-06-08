@@ -1,61 +1,65 @@
 <div>
-    <!-- Card Section -->
-<div class="max-w-2xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-  <!-- Card -->
-  <div class="bg-white border border-gray-200 rounded-xl shadow-2xs overflow-hidden p-4 sm:p-7 dark:bg-neutral-900 dark:border-neutral-700">
-    <div class="text-center mb-8">
-      <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-neutral-200">
-        Assign Technician
-      </h2>
-      <p class="text-sm text-gray-600 dark:text-neutral-400">
-       Select the facility report and the technician to be assigned.
-      </p>
-    </div>
-
-    <!-- Form -->
-    <form wire:submit.prevent="store" class="space-y-6">
-      <div>
-        <label for="facility_report" class="inline-block text-sm font-medium dark:text-white">
-          Pilih Laporan Fasilitas
-        </label>
-        <select id="facility_report" wire:model="facility_report_id" class="mt-2 block w-full py-1.5 sm:py-2 px-3 pe-9 border border-gray-200 rounded-lg shadow-2xs sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-          <option value="">Choose Reports</option>
-          @foreach ($reports as $report)
-            <option value="{{ $report->report_ID }}">{{ $report->report_ID }}</option>
-          @endforeach
-        </select>
+<!-- Card Section -->
+<div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+  <form wire:submit.prevent="store">
+    <!-- Card -->
+    <div class="bg-white rounded-xl shadow-xs dark:bg-neutral-900">
+      <!-- Header Image -->
+      <div class="relative h-40 rounded-t-xl bg-blue-600 bg-[url('https://preline.co/assets/svg/examples/abstract-1.svg')] bg-no-repeat bg-cover bg-center">
+    
       </div>
 
-      <div>
-        <label for="technician_select" class="inline-block text-sm font-medium dark:text-white">
-          Pilih Teknisi
-        </label>
-        <select id="technician_select" wire:model="technician_id" class="mt-2 block w-full py-1.5 sm:py-2 px-3 pe-9 border border-gray-200 rounded-lg shadow-2xs sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-          <option value="">Choose Technician</option>
-          @foreach ($technicians as $tech)
-            <option value="{{ $tech->id }}">{{ $tech->name }}</option>
-          @endforeach
-        </select>
-      </div>
-      <div>
-            <label for="notes" class="inline-block text-sm font-medium dark:text-white">Notes</label>
+      <!-- Card Content -->
+      <div class="pt-0 p-4 sm:pt-0 sm:p-7">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-neutral-200">Assign Technician</h2>
+          <p class="text-sm text-gray-600 dark:text-neutral-400">Select the facility report and the technician to be assigned.</p>
+        </div>
+
+        <!-- Form Grid -->
+        <div class="space-y-6 sm:space-y-7">
+          <!-- Facility Report Select -->
+          <div>
+            <label for="facility_report" class="inline-block text-sm font-medium text-gray-800 dark:text-white">Pilih Laporan Fasilitas</label>
+            <select id="facility_report" wire:model="facility_report_id" class="mt-2 block w-full py-1.5 sm:py-2 px-3 pe-9 border border-gray-200 rounded-lg shadow-2xs sm:text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
+              <option value="">Choose Reports</option>
+              @foreach ($reports as $report)
+                <option value="{{ $report->report_ID }}">{{ $report->report_ID }}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <!-- Technician Select -->
+          <div>
+            <label for="technician_select" class="inline-block text-sm font-medium text-gray-800 dark:text-white">Pilih Teknisi</label>
+            <select id="technician_select" wire:model="technician_id" class="mt-2 block w-full py-1.5 sm:py-2 px-3 pe-9 border border-gray-200 rounded-lg shadow-2xs sm:text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
+              <option value="">Choose Technician</option>
+              @foreach ($technicians as $tech)
+                <option value="{{ $tech->id }}">{{ $tech->name }}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <!-- Notes Textarea -->
+          <div>
+            <label for="notes" class="inline-block text-sm font-medium text-gray-800 dark:text-white">Notes</label>
             <textarea id="notes" wire:model="notes" rows="3" class="mt-2 block w-full border border-gray-200 rounded-lg shadow-2xs sm:text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"></textarea>
-            </div>
+          </div>
+        </div>
 
-
-      <div class="flex justify-end gap-x-2">
-        <button type="submit" class="py-1.5 sm:py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-          {{ $editRepairId ? 'Update' : 'Assign' }}
-        </button>
-        
+        <!-- Submit Button -->
+        <div class="mt-6 flex justify-end gap-x-2">
+          <button type="submit" class="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+            {{ $editRepairId ? 'Update' : 'Assign' }}
+          </button>
+        </div>
       </div>
-
-      
-    </form>
-  </div>
-  <!-- End Card -->
+    </div>
+    <!-- End Card -->
+  </form>
 </div>
 <!-- End Card Section -->
+
 
 
 
@@ -108,7 +112,7 @@
 
         <td class="px-6 py-3 whitespace-nowrap space-x-2">
          
-          <button wire:click="delete({{ $repair->repair_ID }})" onclick="confirm('Are you sure you want to delete this building?') || event.stopImmediatePropagation()" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600">
+          <button wire:click="delete({{ $repair->repair_ID }})" onclick="confirm('Are you sure you want to delete this building?') || event.stopImmediatePropagation()" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-100 text-red-800 hover:bg-red-200 focus:outline-hidden focus:bg-red-200 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:bg-red-800/30 dark:hover:bg-red-800/20 dark:focus:bg-red-800/20">
             Delete
           </button>
         </td>

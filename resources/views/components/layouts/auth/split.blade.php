@@ -13,7 +13,9 @@
                     </span>
                     {{ config('app.name', 'Laravel') }}
                 </a>
-
+            <img src="https://images.unsplash.com/photo-1654593404721-102a6138c225?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NDJ8fHxlbnwwfHx8fHw%3D"
+                    alt="Auth Image"
+                    class="absolute inset-0 h-full w-full object-cover opacity-80" />
                 @php
                     [$message, $author] = str(Illuminate\Foundation\Inspiring::quotes()->random())->explode('-');
                 @endphp
@@ -25,21 +27,23 @@
                     </blockquote>
                 </div>
             </div>
-                    <div class="w-full lg:p-8">
-            <div class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+       <div class="w-full lg:p-12">
+            <div class="mx-auto flex w-full flex-col justify-center space-y-8 sm:w-full max-w-md">
+                <!-- Logo (for small screens) -->
                 <a href="{{ route('home') }}" class="z-20 flex flex-col items-center gap-2 font-medium lg:hidden" wire:navigate>
-                    <span class="flex h-9 w-9 items-center justify-center rounded-md">
-                        <x-app-logo-icon class="size-9 fill-current text-black dark:text-white" />
+                    <span class="flex h-10 w-10 items-center justify-center rounded-md">
+                        <x-app-logo-icon class="size-10 fill-current text-black dark:text-white" />
                     </span>
                     <span class="sr-only">{{ config('app.name', 'Laravel') }}</span>
                 </a>
 
                 <!-- Card box for the form -->
-                <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+                <div class="rounded-2xl border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-neutral-900 space-y-6">
                     {{ $slot }}
                 </div>
             </div>
         </div>
+
         </div>
         @fluxScripts
     </body>

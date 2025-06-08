@@ -2,8 +2,9 @@
 
 namespace App\Livewire\Technician;
 
-use Illuminate\Support\Facades\Auth;
+use App\Models\Repair;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class TechnicianDashboard extends Component
 {
@@ -14,8 +15,11 @@ class TechnicianDashboard extends Component
         $this->user = Auth::user();
     }
 
-    public function render()
-    {
-        return view('livewire.technician.technician-dashboard');
-    }
+                public function render()
+            {
+                return view('livewire.technician.technician-dashboard', [
+                    'repairs' => Repair::where('technician_id', Auth::id())->latest('repair_ID')->get(),
+                ]);
+            }
+
 }

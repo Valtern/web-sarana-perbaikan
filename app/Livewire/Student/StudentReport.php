@@ -19,6 +19,7 @@ class StudentReport extends Component
     public $weight = [];
 
     public $reports;
+    public $user;
 
     public function mount()
     {
@@ -26,7 +27,9 @@ class StudentReport extends Component
             ->where('user_ID', auth()->id())
             ->latest()
             ->get();
+            $this->user = Auth::user();
     }
+   
 
     public function submit()
 {

@@ -11,7 +11,7 @@ class Repair extends Model
 
     protected $primaryKey = 'repair_ID';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'facility_report_id',
