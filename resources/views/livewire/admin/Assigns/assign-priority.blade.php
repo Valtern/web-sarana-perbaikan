@@ -1,5 +1,5 @@
 <div class="min-h-screen flex items-center justify-center px-4 py-10">
-  <div class="w-full max-w-3xl bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-xl p-6 sm:p-10 ">
+  <div class="w-full @if($mode === 'sample') max-w-7xl @else max-w-3xl @endif bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-xl p-6 sm:p-10 transition-all duration-300">
     <h2 class="text-2xl font-semibold text-gray-800 dark:text-neutral-200 mb-6">
       Fill in the form
     </h2>
