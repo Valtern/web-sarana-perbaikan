@@ -2,7 +2,7 @@
   <div>
   <div class="max-w-7xl mx-auto grid grid-cols-1 gap-6">
     <!-- Profile (Expanded Full Width) -->
-    <div class="p-6 shadow bg-blue-600 bg-[url('https://preline.co/assets/svg/examples/abstract-1.svg')] bg-no-repeat bg-cover bg-center rounded-3xl text-left">
+    <div class="p-6 shadow bg-blue-600 dark:bg-blue-900 bg-[url('https://preline.co/assets/svg/examples/abstract-1.svg')] bg-no-repeat bg-cover bg-center rounded-3xl text-left text-white">
   <div class="flex items-center gap-4 justify-between">
     <div>
       <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white dark:text-white mb-6">
@@ -20,7 +20,7 @@
     <!-- Schedule + Contacts side-by-side -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <!-- Class Schedule -->
-     <div class="bg-white rounded-2xl p-6 shadow col-span-2">
+     <div class="col-span-2 p-6 rounded-2xl  border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-gray-900 dark:text-white">
     <h3 class="text-lg font-semibold mb-4">Report History</h3>
     <table class="w-full text-sm">
         <thead>
@@ -43,8 +43,8 @@
 </div>
 
 
-      <!-- Contacts -->
-      <div class="bg-white rounded-2xl p-6 shadow">
+      <!-- Status -->
+     <div class="p-6 rounded-2xl  border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-gray-900 dark:text-white">
         <h3 class="text-lg font-semibold mb-4">Status</h3>
         <div class="flex flex-col justify-center items-center">
           <div id="hs-doughnut-chart"></div>

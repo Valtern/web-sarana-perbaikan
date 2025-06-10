@@ -21,7 +21,7 @@
     <!-- Schedule + Contacts side-by-side -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <!-- Class Schedule -->
-     <div class="bg-white rounded-2xl p-6 shadow col-span-2">
+     <div class="col-span-2 p-6 rounded-2xl border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-gray-900 dark:text-white">
     <h3 class="text-lg font-semibold mb-4">Report History</h3>
     <table class="w-full text-sm">
         <thead>
@@ -45,7 +45,7 @@
 
 
       <!-- Contacts -->
-      <div class="bg-white rounded-2xl p-6 shadow">
+      <div class="p-6 rounded-2xl border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-gray-900 dark:text-white">
         <h3 class="text-lg font-semibold mb-4">Status</h3>
         <div class="flex flex-col justify-center items-center">
           <div id="hs-doughnut-chart"></div>

@@ -10,7 +10,7 @@
       </div>
 
       <!-- Card Content -->
-      <div class="pt-0 p-4 sm:pt-0 sm:p-7">
+      <div class="mt-5 p-4 sm:mt-4 sm:p-7">
         <div class="text-center mb-8">
           <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-neutral-200">Assign Technician</h2>
           <p class="text-sm text-gray-600 dark:text-neutral-400">Select the facility report and the technician to be assigned.</p>
@@ -20,7 +20,7 @@
         <div class="space-y-6 sm:space-y-7">
           <!-- Facility Report Select -->
           <div>
-            <label for="facility_report" class="inline-block text-sm font-medium text-gray-800 dark:text-white">Pilih Laporan Fasilitas</label>
+            <label for="facility_report" class="inline-block text-sm font-medium text-gray-800 dark:text-white">Choose Reports Facilities</label>
             <select id="facility_report" wire:model="facility_report_id" class="mt-2 block w-full py-1.5 sm:py-2 px-3 pe-9 border border-gray-200 rounded-lg shadow-2xs sm:text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
               <option value="">Choose Reports</option>
               @foreach ($reports as $report)
@@ -31,9 +31,9 @@
 
           <!-- Technician Select -->
           <div>
-            <label for="technician_select" class="inline-block text-sm font-medium text-gray-800 dark:text-white">Pilih Teknisi</label>
+            <label for="technician_select" class="inline-block text-sm font-medium text-gray-800 dark:text-white">Choose the technician</label>
             <select id="technician_select" wire:model="technician_id" class="mt-2 block w-full py-1.5 sm:py-2 px-3 pe-9 border border-gray-200 rounded-lg shadow-2xs sm:text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
-              <option value="">Choose Technician</option>
+              <option>Choose Technician</option>
               @foreach ($technicians as $tech)
                 <option value="{{ $tech->id }}">{{ $tech->name }}</option>
               @endforeach
