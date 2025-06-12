@@ -44,7 +44,7 @@
     @case('lecturer')
             <flux:navlist.group :heading="__('Lecturer Menu')" class="grid">
                 <flux:navlist.item
-                    icon="users"
+                    icon="newspaper"
                     :href="route('lecturer.report')"
                     :current="request()->routeIs('lecturer.report')"
                     wire:navigate
@@ -155,7 +155,7 @@
         @case('student')
             <flux:navlist.group :heading="__('Student Menu')" class="grid">
                 <flux:navlist.item
-                    icon="document"
+                    icon="newspaper"
                     :href="route('student.report')"
                     :current="request()->routeIs('student.report')"
                     wire:navigate
@@ -194,7 +194,7 @@
         @case('staff')
             <flux:navlist.group :heading="__('Staff Menu')" class="grid">
                 <flux:navlist.item
-                    icon="document"
+                    icon="newspaper"
                     :href="route('staff.report')"
                     :current="request()->routeIs('staff.report')"
                     wire:navigate
@@ -270,7 +270,7 @@
 
         <flux:spacer />
         <flux:menu.radio.group>
-                    <flux:menu.item :href="route('faq.appearancefaq')" icon="cog" wire:navigate>
+                    <flux:menu.item :href="route('faq.appearancefaq')" icon="information-circle" wire:navigate>
                         {{ __('FAQ Sections') }}
                     </flux:menu.item>
         </flux:menu.radio.group>
