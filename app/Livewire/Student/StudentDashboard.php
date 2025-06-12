@@ -21,10 +21,21 @@ class StudentDashboard extends Component
         $this->selectedReport = $this->reports->firstWhere('report_ID', $reportId);
     }
 
-    public function render()
-    {
-        return view('livewire.student.student-dashboard', [
-            'reports' => Report::where('user_ID', Auth::id())->latest()->get(),
-        ]);
-    }
+   public function render()
+{
+    $reports = Report::where('user_ID', Auth::id())->latest()->get();
+
+    $chartData = [
+        'in_progress' => $reports->where('status', 'In_progress')->count(),
+        'pending' => $reports->where('status', 'Pending')->count(),
+        'solved' => $reports->where('status', 'Solved')->count(),
+    ];
+
+    return view('livewire.student.student-dashboard', [
+        'reports' => $reports,
+        'chartData' => $chartData,
+    ]);
+}
+
+
 }

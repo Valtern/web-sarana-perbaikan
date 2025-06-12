@@ -31,18 +31,34 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($reports as $report)
-            <tr class="border-t">
-                <td class="py-2">{{ $report->facility_name }}</td>
-                <td class="py-2">{{ $report->created_at->format('d M, H:i') }}</td>
-                <td class="py-2">{{ $report->status }}</td>
-            </tr>
-            @endforeach
-        </tbody>
+    @foreach($reports as $report)
+    <tr class="border-t">
+        <td class="py-2">{{ $report->facility_name }}</td>
+        <td class="py-2">{{ $report->created_at->format('d M, H:i') }}</td>
+        <td class="py-2">
+            @if($report->status == 'In_progress')
+            <span class="text-xs font-medium bg-blue-100 text-blue-800 rounded-full py-1 px-3 dark:bg-blue-500/10 dark:text-blue-500">
+                In Progress
+            </span>
+            @elseif($report->status == 'Pending')
+            <span class="text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full py-1 px-3 dark:bg-yellow-500/10 dark:text-yellow-500">
+                Pending
+            </span>
+            @elseif($report->status == 'Solved')
+            <span class="text-xs font-medium bg-green-100 text-green-800 rounded-full py-1 px-3 dark:bg-green-500/10 dark:text-green-500">
+                Solved
+            </span>
+            @endif
+        </td>
+    </tr>
+    @endforeach
+</tbody>
     </table>
 </div>
 
 
+      <!-- Status -->
+     
       <!-- Status -->
      <div class="p-6 rounded-2xl  border border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-gray-900 dark:text-white">
         <h3 class="text-lg font-semibold mb-4">Status</h3>
@@ -81,71 +97,73 @@
 <script src="https://preline.co/assets/js/hs-apexcharts-helpers.js"></script>
 
 <script>
-  window.addEventListener('load', () => {
-    // Apex Doughnut Chart
-    (function () {
-      buildChart('#hs-doughnut-chart', (mode) => ({
-        chart: {
-          height: 230,
-          width: 230,
-          type: 'donut',
-          zoom: {
-            enabled: false
-          }
-        },
-        plotOptions: {
-          pie: {
-            donut: {
-              size: '76%'
-            }
-          }
-        },
-        series: [47, 23, 30],
-        labels: ['Tailwind CSS', 'Preline UI', 'Others'],
-        legend: {
-          show: false
-        },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          width: 5
-        },
-        grid: {
-          padding: {
-            top: -12,
-            bottom: -11,
-            left: -12,
-            right: -12
-          }
-        },
-        states: {
-          hover: {
-            filter: {
-              type: 'none'
-            }
-          }
-        },
-        tooltip: {
-          enabled: true,
-          custom: function (props) {
-            return buildTooltipForDonut(
-              props,
-              mode === 'dark' ? ['#fff', '#fff', '#000'] : ['#fff', '#fff', '#000']
-            );
-          }
-        }
-      }), {
-        colors: ['#3b82f6', '#22d3ee', '#e5e7eb'],
-        stroke: {
-          colors: ['rgb(255, 255, 255)']
-        }
-      }, {
-        colors: ['#3b82f6', '#22d3ee', '#404040'],
-        stroke: {
-          colors: ['rgb(38, 38, 38)']
-        }
-      });
-    })();
-  });
+    window.addEventListener('load', () => {
+        (function () {
+            // Get the chart data from Livewire
+            const chartData = @json($chartData);
+            
+            buildChart('#hs-doughnut-chart', (mode) => ({
+                chart: {
+                    height: 230,
+                    width: 230,
+                    type: 'donut',
+                    zoom: {
+                        enabled: false
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            size: '76%'
+                        }
+                    }
+                },
+                series: [chartData.in_progress, chartData.pending, chartData.solved],
+                labels: ['In Progress', 'Pending', 'Solved'],
+                legend: {
+                    show: false
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    width: 5
+                },
+                grid: {
+                    padding: {
+                        top: -12,
+                        bottom: -11,
+                        left: -12,
+                        right: -12
+                    }
+                },
+                states: {
+                    hover: {
+                        filter: {
+                            type: 'none'
+                        }
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                    custom: function (props) {
+                        return buildTooltipForDonut(
+                            props,
+                            mode === 'dark' ? ['#fff', '#fff', '#000'] : ['#fff', '#fff', '#000']
+                        );
+                    }
+                }
+            }), {
+                colors: ['#3b82f6', '#22d3ee', '#e5e7eb'],
+                stroke: {
+                    colors: ['rgb(255, 255, 255)']
+                }
+            }, {
+                colors: ['#3b82f6', '#22d3ee', '#404040'],
+                stroke: {
+                    colors: ['rgb(38, 38, 38)']
+                }
+            });
+        })();
+    });
 </script>

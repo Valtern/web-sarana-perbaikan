@@ -139,7 +139,7 @@
             <div class="w-full flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
                 <div class="flex justify-between items-center py-3 px-4 border-b border-gray-200 dark:border-neutral-700">
                     <h3 id="hs-vertically-centered-modal-label" class="font-bold text-gray-800 dark:text-white">
-                        Detail Laporan
+                        Picture Proof
                     </h3>
                     <button type="button" class="size-8 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600" aria-label="Close" data-hs-overlay="#hs-vertically-centered-modal">
                         <span class="sr-only">Close</span>
@@ -152,7 +152,6 @@
                 <div class="p-4 overflow-y-auto space-y-4 text-gray-800 dark:text-neutral-400">
                     @if ($selectedReport && $selectedReport->picture_proof)
                     <div>
-                        <strong>Picture Proof:</strong><br>
                         <img src="{{ Storage::url($selectedReport->picture_proof) }}" alt="Bukti kerusakan" class="max-w-full rounded-lg border border-gray-300 dark:border-neutral-600 shadow" />
                     </div>
                     @else

@@ -40,6 +40,29 @@
             </tr>
             @endforeach
         </tbody>
+        <tbody>
+    @foreach($reports as $report)
+    <tr class="border-t">
+        <td class="py-2">{{ $report->facility_name }}</td>
+        <td class="py-2">{{ $report->created_at->format('d M, H:i') }}</td>
+        <td class="py-2">
+            @if($repair->repair_status == 'Not_started')
+            <span class="text-xs font-medium bg-blue-100 text-blue-800 rounded-full py-1 px-3 dark:bg-blue-500/10 dark:text-blue-500">
+                In Progress
+            </span>
+            @elseif($repair->repair_status == 'In_progress')
+            <span class="text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full py-1 px-3 dark:bg-yellow-500/10 dark:text-yellow-500">
+                Pending
+            </span>
+            @elseif($repair->repair_status == 'Completed')
+            <span class="text-xs font-medium bg-green-100 text-green-800 rounded-full py-1 px-3 dark:bg-green-500/10 dark:text-green-500">
+                Solved
+            </span>
+            @endif
+        </td>
+    </tr>
+    @endforeach
+</tbody>
     </table>
 </div>
 
