@@ -45,79 +45,55 @@ $statusLabels = [
 <!-- Table Body -->
 <div>
 <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-  @foreach($repairs as $repair)
-  <tr>
-    <td class="px-6 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $repair->report->facility_name }}</td>
-    <td class="px-6 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $repair->report->location }}</td>
-    <td class="px-6 py-4 whitespace-nowrap text-sm">
-<button
-  type="button"
-  onclick="showDescription(`{{ $repair->report->description ?? 'No description available.' }}`)"
-        class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-100 text-teal-800 hover:bg-teal-200 focus:outline-hidden focus:bg-teal-200 disabled:opacity-50 disabled:pointer-events-none dark:text-teal-500 dark:bg-teal-800/30 dark:hover:bg-teal-800/20 dark:focus:bg-teal-800/20" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-description-modal" data-hs-overlay="#hs-description-modal">
-  View
-</button>
-                </td>
-
-     <td class="px-6 py-4 whitespace-nowrap text-sm">
- <button
-  type="button"
-  onclick="showNotes(`{{ $repair->notes ?? 'No notes available.' }}`)"
-  class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-hidden focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-400 dark:bg-blue-800/30 dark:hover:bg-blue-800/20 dark:focus:bg-blue-800/20">
-  View
-</button>
-        </td>
-    <td class="px-6 py-3 text-sm text-gray-800 dark:text-neutral-200">
-      {{ $repair->report->priority_Assignment ?? 'N/A' }}
-    </td>
-
-     <td class="px-6 py-4 whitespace-nowrap text-sm">
- <button
-  type="button"
-  onclick="showProofImage(`{{ $repair->report->picture_proof ? Storage::url($repair->report->picture_proof) : '' }}`)"
-  class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-yellow-100 text-yellow-800 hover:bg-yellow-200 focus:outline-hidden focus:bg-yellow-200 disabled:opacity-50 disabled:pointer-events-none dark:text-yellow-500 dark:bg-yellow-800/30 dark:hover:bg-yellow-800/20 dark:focus:bg-yellow-800/20">
-  View
-</button>
-
-                </td>
-
-          <td class="px-6 py-3 text-sm text-gray-800 dark:text-neutral-200">
-          <div class="hs-dropdown relative inline-flex">
-            <button id="hs-dropdown-unstyled" type="button"
-              class="hs-dropdown-toggle inline-flex justify-center items-center gap-x-2 text-sm font-medium text-gray-700 dark:text-neutral-300 border border-gray-300 dark:border-neutral-600 rounded-lg px-4 py-2 bg-white dark:bg-neutral-900 hover:bg-gray-100 dark:hover:bg-neutral-800"
-              aria-expanded="false" aria-label="Menu">
-              Actions
-            </button>
-
-            <div
-              class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden z-10 mt-2 w-56 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-lg shadow-lg p-2 space-y-1"
-              role="menu" aria-labelledby="hs-dropdown-unstyled">
-
-              @foreach($statusLabels as $value => $label)
-                <button
-                  wire:click="updateRepairStatus({{ $repair->repair_ID }}, '{{ $value }}')"
-                  class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-neutral-200 hover:bg-gray-100 dark:hover:bg-neutral-800 rounded-md"
-                  role="menuitem">
-                  {{ $label }}
-                </button>
-              @endforeach
-
-            </div>
+  @forelse($repairs as $repair)
+    <tr>
+      <td class="px-6 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $repair->report->facility_name }}</td>
+      <td class="px-6 py-3 text-sm text-gray-800 dark:text-neutral-200">{{ $repair->report->location }}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm">
+        <button type="button" onclick="showDescription(`{{ e($repair->report->description) ?? 'No description available.' }}`)" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-teal-100 text-teal-800 hover:bg-teal-200 focus:outline-hidden focus:bg-teal-200 disabled:opacity-50 disabled:pointer-events-none dark:text-teal-500 dark:bg-teal-800/30 dark:hover:bg-teal-800/20 dark:focus:bg-teal-800/20" aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-description-modal" data-hs-overlay="#hs-description-modal">
+          View
+        </button>
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm">
+        <button type="button" onclick="showNotes(`{{ e($repair->notes) ?? 'No notes available.' }}`)" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-hidden focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-400 dark:bg-blue-800/30 dark:hover:bg-blue-800/20 dark:focus:bg-blue-800/20">
+          View
+        </button>
+      </td>
+      <td class="px-6 py-3 text-sm text-gray-800 dark:text-neutral-200">
+        {{ $repair->report->priority_Assignment ?? 'N/A' }}
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm">
+        <button type="button" onclick="showProofImage(`{{ $repair->report->picture_proof ? Storage::url($repair->report->picture_proof) : '' }}`)" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-yellow-100 text-yellow-800 hover:bg-yellow-200 focus:outline-hidden focus:bg-yellow-200 disabled:opacity-50 disabled:pointer-events-none dark:text-yellow-500 dark:bg-yellow-800/30 dark:hover:bg-yellow-800/20 dark:focus:bg-yellow-800/20">
+          View
+        </button>
+      </td>
+      <td class="px-6 py-3 text-sm text-gray-800 dark:text-neutral-200">
+        <div class="hs-dropdown relative inline-flex">
+          <button id="hs-dropdown-unstyled" type="button" class="hs-dropdown-toggle inline-flex justify-center items-center gap-x-2 text-sm font-medium text-gray-700 dark:text-neutral-300 border border-gray-300 dark:border-neutral-600 rounded-lg px-4 py-2 bg-white dark:bg-neutral-900 hover:bg-gray-100 dark:hover:bg-neutral-800" aria-expanded="false" aria-label="Menu">
+            Actions
+          </button>
+          <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden z-10 mt-2 w-56 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-lg shadow-lg p-2 space-y-1" role="menu" aria-labelledby="hs-dropdown-unstyled">
+            @foreach($statusLabels as $value => $label)
+              <button wire:click="updateRepairStatus({{ $repair->repair_ID }}, '{{ $value }}')" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-neutral-200 hover:bg-gray-100 dark:hover:bg-neutral-800 rounded-md" role="menuitem">
+                {{ $label }}
+              </button>
+            @endforeach
           </div>
-        </td>
-
-
-
-        <td class="px-6 py-3">
-      <button
-        wire:click="decline({{ $repair->repair_ID }})"
-        onclick="return confirm('Are you sure you want to decline and delete this assignment?')"
-        class="py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg border border-red-200 bg-red-100 text-red-800 hover:bg-red-200 dark:bg-red-900 dark:border-red-700 dark:text-white dark:hover:bg-red-800">
-        Decline
-      </button>
-    </td>
-
-  </tr>
-  @endforeach
+        </div>
+      </td>
+      <td class="px-6 py-3">
+        <button wire:click="decline({{ $repair->repair_ID }})" onclick="return confirm('Are you sure you want to decline and delete this assignment?')" class="py-2 px-3 inline-flex items-center gap-x-2 text-xs rounded-lg border border-red-200 bg-red-100 text-red-800 hover:bg-red-200 dark:bg-red-900 dark:border-red-700 dark:text-white dark:hover:bg-red-800">
+          Decline
+        </button>
+      </td>
+    </tr>
+  @empty
+    <tr>
+      <td colspan="8" class="px-6 py-4 text-center text-gray-500 dark:text-neutral-400">
+        There are no repair assignments at the moment.
+      </td>
+    </tr>
+  @endforelse
 </tbody>
 </div>
             </table>
@@ -138,16 +114,16 @@ $statusLabels = [
           </svg>
         </button>
       </div>
-      <div class="p-4 overflow-y-auto space-y-4 text-gray-800 dark:text-neutral-400">
-        @if ($repair->report->picture_proof)
-          <div>
-            <strong>Picture Proof:</strong><br>
-            <img src="{{ Storage::url($repair->report->picture_proof) }}" alt="Bukti kerusakan" class="max-w-full rounded-lg border border-gray-300 dark:border-neutral-600 shadow" />
-          </div>
-        @else
-          <p><em>Tidak ada foto bukti.</em></p>
-        @endif
-      </div>
+<div class="p-4 overflow-y-auto space-y-4 text-gray-800 dark:text-neutral-400">
+  @if (isset($repair) && $repair->report->picture_proof)
+    <div>
+      <strong>Picture Proof:</strong><br>
+      <img src="{{ Storage::url($repair->report->picture_proof) }}" alt="Bukti kerusakan" class="max-w-full rounded-lg border border-gray-300 dark:border-neutral-600 shadow" />
+    </div>
+  @else
+    <p><em>Tidak ada foto bukti.</em></p>
+  @endif
+</div>
     </div>
   </div>
 </div>
