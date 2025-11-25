@@ -21,15 +21,12 @@ class ManageAssignmentStatus extends Component
         $this->repairCount = $this->repairs->count();
     }
 
-    public function loadRepairs()
-    {
-        $this->repairs = Repair::with('report')
-            ->where('technician_id', Auth::id())
-            ->whereHas('report', function ($query) {
-                $query->where('status', '!=', 'Declined');
-            })
-            ->get();
-    }
+public function loadRepairs()
+{
+    $this->repairs = Repair::with('report')
+        ->where('technician_id', Auth::id())
+        ->get();
+}
 
     public function accept(int $repairId): void
     {
